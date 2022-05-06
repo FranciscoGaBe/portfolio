@@ -116,7 +116,12 @@ const menuItems = [
 );
 
 const MainMenu: React.FC = () => (
-  <div className="bg-rose-800 pl-2 py-4 flex flex-col gap-3 mb-20">
+  <motion.div
+    initial={{ y: 10 }}
+    animate={{ y: 0 }}
+    transition={{ delay: 0.2, ease: 'easeOut', duration: 0.2 }}
+    className="bg-rose-800 pl-2 py-4 flex flex-col gap-3 mb-20"
+  >
     {
       menuItems.map((item) => (
         <div key={item.title} className="px-2">
@@ -137,7 +142,7 @@ const MainMenu: React.FC = () => (
         </div>
       ))
     }
-  </div>
+  </motion.div>
 );
 
 const StartMenu: React.FC<Props> = ({ containerRef }) => {
@@ -151,9 +156,9 @@ const StartMenu: React.FC<Props> = ({ containerRef }) => {
             <AnimatePresence>
               { show && (
               <motion.div
-                initial={{ y: 100 }}
+                initial={{ y: '100%' }}
                 animate={{ y: 0 }}
-                exit={{ y: 100 }}
+                exit={{ y: '100%' }}
                 transition={{ ease: 'easeOut', duration: 0.2 }}
                 className="bottom-0 left-0 absolute bg-rose-800 shadow-lg shadow-black"
               >
