@@ -31,7 +31,7 @@ const WelcomeScreen: React.FC = () => {
       { show && (
       <motion.div
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-rose-800 flex items-center justify-center"
+        className="fixed inset-0 bg-rose-800 flex items-center justify-center z-50"
       >
         <AnimatePresence exitBeforeEnter>
           <motion.p
