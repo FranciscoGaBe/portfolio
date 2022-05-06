@@ -1,8 +1,9 @@
+import Desktop from './components/Desktop';
 import WelcomeScreen from './components/WelcomeScreen';
 
 const App: React.FC = () => (
-  <div>
-    <div>Content</div>
+  <div className="h-full flex flex-col">
+    <Desktop />
     <WelcomeScreen />
   </div>
 );
