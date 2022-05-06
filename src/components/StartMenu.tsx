@@ -4,7 +4,7 @@ import {
 import { faBars, faPowerOff } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import PowerOff from './PowerOff';
 
@@ -21,6 +21,16 @@ const itemClassName = [
 const SideMenu: React.FC = () => {
   const [show, setShow] = useState(false);
   const [powerOff, setPowerOff] = useState(false);
+  const [hovering, setHovering] = useState(false);
+
+  useEffect(() => {
+    if (!hovering) {
+      setShow(false);
+      return () => undefined;
+    }
+    const timeout = window.setTimeout(() => setShow(true), 500);
+    return () => window.clearTimeout(timeout);
+  }, [hovering]);
 
   const buttons = [
     { icon: faLinkedin, title: 'Linkedin', link: 'https://www.linkedin.com/in/francisco-garrido-679084198/' },
@@ -30,7 +40,11 @@ const SideMenu: React.FC = () => {
 
   return (
     <>
-      <div className="w-12 relative">
+      <div
+        className="w-12 relative"
+        onPointerMove={() => setHovering(true)}
+        onPointerLeave={() => setHovering(false)}
+      >
         <div
           className={[
             'transition-all duration-200 h-full',
