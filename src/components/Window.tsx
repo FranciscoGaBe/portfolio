@@ -33,11 +33,6 @@ const getElementData = (button: HTMLElement) => {
 };
 
 const variants: Variants = {
-  initial: ({ el }: { el: HTMLElement }) => ({
-    ...getElementData(el),
-    opacity: 0,
-    position: 'fixed',
-  }),
   animate: ({ show, el }: { el: HTMLElement, show: boolean }) => (
     show
       ? {
@@ -72,7 +67,7 @@ const AnimationWrapper = ({
         <motion.div
           variants={variants}
           custom={{ el: taskbarButtonElement, show }}
-          initial="initial"
+          initial={false}
           animate="animate"
           transition={{ duration: 0.2, ease: 'easeInOut' }}
           className="bg-neutral-700 pointer-events-auto flex flex-col"
