@@ -2,24 +2,28 @@ import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import ReactDOM from 'react-dom';
+import Window from './Window';
 
 export interface IApplication {
   name: string,
-  icon: IconDefinition
+  icon: IconDefinition,
+  url: string,
+  githubUrl?: string
 }
 
 interface Props {
   app: IApplication,
-  desktopRef: React.RefObject<HTMLElement>,
-  taskbarIconsRef: React.RefObject<HTMLElement>
+  desktopElement: HTMLElement,
+  taskbarIconsElement: HTMLElement
 }
 
-const Application = ({ app, desktopRef, taskbarIconsRef }: Props): JSX.Element => {
+const Application = ({ app, desktopElement, taskbarIconsElement }: Props): JSX.Element => {
   const [show, setShow] = useState(false);
   const [open, setOpen] = useState(false);
+  const [taskbarButtonElement, setTaskbarButtonElement] = useState<HTMLElement | null>(null);
 
   const handleClick = () => {
-    setShow(!show);
+    setShow(true);
     setOpen(true);
   };
 
@@ -41,13 +45,21 @@ const Application = ({ app, desktopRef, taskbarIconsRef }: Props): JSX.Element =
           { app.name }
         </p>
       </button>
-      { open && show && desktopRef.current && ReactDOM.createPortal(
-        <div>window</div>,
-        desktopRef.current,
+      { ReactDOM.createPortal(
+        <Window
+          app={app}
+          taskbarButtonElement={taskbarButtonElement as HTMLElement}
+          open={open}
+          show={show}
+          setShow={setShow}
+          setOpen={setOpen}
+        />,
+        desktopElement,
       ) }
-      { open && taskbarIconsRef.current && ReactDOM.createPortal(
+      { open && ReactDOM.createPortal(
         (
           <button
+            ref={setTaskbarButtonElement}
             className={[
               'transition-all duration-200',
               'h-10 w-12 text-white text-2xl relative group',
@@ -67,7 +79,7 @@ const Application = ({ app, desktopRef, taskbarIconsRef }: Props): JSX.Element =
             />
           </button>
         ),
-        taskbarIconsRef.current,
+        taskbarIconsElement,
       ) }
     </>
   );
