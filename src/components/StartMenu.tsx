@@ -6,48 +6,51 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+import PowerOff from './PowerOff';
 
 interface Props {
   containerRef: React.RefObject<HTMLElement>
 }
 
-const buttons = [
-  { icon: faLinkedin, title: 'Linkedin', link: 'https://www.linkedin.com/in/francisco-garrido-679084198/' },
-  { icon: faGithub, title: 'Github', link: 'https://github.com/FranciscoGaBe' },
-  { icon: faPowerOff, title: 'Power Off', onClick: () => { window.close(); } },
-];
+const itemClassName = [
+  'transition-colors duration-200',
+  'h-12 text-xl',
+  'hover:bg-white/10',
+].join(' ');
 
 const SideMenu: React.FC = () => {
   const [show, setShow] = useState(false);
+  const [powerOff, setPowerOff] = useState(false);
 
-  const itemClassName = [
-    'transition-colors duration-200',
-    'h-12 text-xl',
-    'hover:bg-white/10',
-  ].join(' ');
+  const buttons = [
+    { icon: faLinkedin, title: 'Linkedin', link: 'https://www.linkedin.com/in/francisco-garrido-679084198/' },
+    { icon: faGithub, title: 'Github', link: 'https://github.com/FranciscoGaBe' },
+    { icon: faPowerOff, title: 'Power Off', onClick: () => setPowerOff(true) },
+  ];
 
   return (
-    <div className="w-12 relative">
-      <div
-        className={[
-          'transition-all duration-200 h-full',
-          'shrink-0 w-12 flex flex-col pt-1 overflow-hidden',
-          show ? 'bg-rose-900 w-60 shadow shadow-black' : 'bg-rose-800 w-12',
-        ].join(' ')}
-      >
-        <div className={`${itemClassName} mb-auto`}>
-          <button
-            className="flex items-center"
-            type="button"
-            onClick={() => setShow(!show)}
-          >
-            <div className="w-12 h-12 flex items-center justify-center shrink-0">
-              <FontAwesomeIcon icon={faBars} />
-            </div>
-            <p className="text-base px-2 font-bold whitespace-nowrap">START</p>
-          </button>
-        </div>
-        {
+    <>
+      <div className="w-12 relative">
+        <div
+          className={[
+            'transition-all duration-200 h-full',
+            'shrink-0 w-12 flex flex-col pt-1 overflow-hidden',
+            show ? 'bg-rose-900 w-60 shadow shadow-black' : 'bg-rose-800 w-12',
+          ].join(' ')}
+        >
+          <div className={`${itemClassName} mb-auto`}>
+            <button
+              className="flex items-center"
+              type="button"
+              onClick={() => setShow(!show)}
+            >
+              <div className="w-12 h-12 flex items-center justify-center shrink-0">
+                <FontAwesomeIcon icon={faBars} />
+              </div>
+              <p className="text-base px-2 font-bold whitespace-nowrap">START</p>
+            </button>
+          </div>
+          {
         buttons.map((button) => (
           <div key={button.title} className={itemClassName}>
             { button.link && (
@@ -78,8 +81,10 @@ const SideMenu: React.FC = () => {
           </div>
         ))
       }
+        </div>
       </div>
-    </div>
+      { powerOff && ReactDOM.createPortal(<PowerOff />, document.querySelector('#root') as Element) }
+    </>
   );
 };
 
