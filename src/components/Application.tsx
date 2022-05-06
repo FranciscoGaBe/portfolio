@@ -32,9 +32,9 @@ const Application = ({ app, desktopElement, taskbarIconsElement }: Props): JSX.E
       <button
         type="button"
         className={[
-          'transition-colors duration-200',
+          'default-hover-10',
           'select-none text-white w-20 h-20',
-          'hover:bg-white/10 border-2 border-transparent hover:border-white/20',
+          'border-2 border-transparent hover:border-white/20',
         ].join(' ')}
         onClick={handleClick}
       >
@@ -61,9 +61,9 @@ const Application = ({ app, desktopElement, taskbarIconsElement }: Props): JSX.E
           <button
             ref={setTaskbarButtonElement}
             className={[
-              'transition-all duration-200',
+              'default-hover-20',
               'h-10 w-12 text-white text-2xl relative group',
-              'hover:bg-white/20 flex justify-center items-center',
+              'flex justify-center items-center',
               show ? 'bg-white/10' : '',
             ].join(' ')}
             type="button"

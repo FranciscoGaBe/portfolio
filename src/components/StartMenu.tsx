@@ -12,11 +12,7 @@ interface Props {
   containerRef: React.RefObject<HTMLElement>
 }
 
-const itemClassName = [
-  'transition-colors duration-200',
-  'h-12 text-xl',
-  'hover:bg-white/10',
-].join(' ');
+const itemClassName = 'default-hover-10 h-12 text-xl';
 
 const SideMenu: React.FC = () => {
   const [show, setShow] = useState(false);
