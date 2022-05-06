@@ -1,3 +1,3 @@
-const App: React.FC = () => null
+const App: React.FC = () => <div>hola</div>;
 
 export default App;
