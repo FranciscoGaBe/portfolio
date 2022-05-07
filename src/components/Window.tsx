@@ -1,5 +1,6 @@
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import {
+  faChevronDown,
   faExternalLink,
   faRotateRight,
   faWindowMaximize, faWindowMinimize, faXmark,
@@ -83,10 +84,12 @@ const AnimationWrapper = ({ app, children }: PropsWithChildren<Props>): JSX.Elem
 const Window = ({ app }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const [reload, setReload] = useState(false);
+  const [showDescription, setShowDescription] = useState(false);
 
   const close = () => dispatch(closeApp(app.id));
 
   const appButtons = [
+    { icon: faChevronDown, onClick: () => setShowDescription(!showDescription) },
     { icon: faWindowMinimize, onClick: () => dispatch(hideApp(app.id)) },
     { icon: faWindowMaximize, onClick: () => dispatch(showApp(app.id)) },
     { icon: faXmark, onClick: close },
@@ -131,23 +134,41 @@ const Window = ({ app }: Props): JSX.Element => {
             <div className="w-full h-full bg-rose-800 rounded-bl-2xl" />
           </div>
         </div>
-        <div className="ml-auto shrink-0">
-          {
-            appButtons.map((button) => (
-              <button
-                key={button.id}
-                className={[
-                  'default-hover-10',
-                  'h-full text-lg w-10 last:text-xl',
-                  'last:hover:bg-red-600',
-                ].join(' ')}
-                type="button"
-                onClick={button.onClick}
-              >
-                <FontAwesomeIcon icon={button.icon} />
-              </button>
-            ))
-          }
+        <div className="ml-auto shrink-0 h-full relative">
+          <div className="absolute bottom-0 left-0">
+            <AnimatePresence>
+              { showDescription && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.7 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.7 }}
+                  transition={{ duration: 0.1, ease: 'easeOut' }}
+                  className="absolute top-0 -right-12 bg-neutral-800 shadow-[0px_1px_2px_1px_black] p-4 w-56"
+                >
+                  { app.desc }
+                </motion.div>
+              ) }
+            </AnimatePresence>
+          </div>
+          <div className="flex h-full">
+            {
+              appButtons.map((button) => (
+                <button
+                  key={button.id}
+                  className={[
+                    'default-hover-10',
+                    'h-full w-12 first:text-sm last:text-xl',
+                    'last:hover:bg-red-600',
+                    showDescription ? 'first:bg-white/10' : '',
+                  ].join(' ')}
+                  type="button"
+                  onClick={button.onClick}
+                >
+                  <FontAwesomeIcon icon={button.icon} />
+                </button>
+              ))
+            }
+          </div>
         </div>
       </div>
       <div

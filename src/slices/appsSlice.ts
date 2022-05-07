@@ -10,7 +10,8 @@ export interface IApplication {
   url: string,
   githubUrl?: string,
   open: boolean,
-  shortDesc: string
+  shortDesc: string,
+  desc: string
 }
 
 interface AppsState {
