@@ -4,7 +4,7 @@ import {
 import { faBars, faPowerOff } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import PowerOff from './PowerOff';
 
@@ -160,7 +160,7 @@ const MainMenu: React.FC = () => (
   </motion.div>
 );
 
-const StartMenu: React.FC<Props> = ({ containerRef }) => {
+const StartMenu = ({ containerRef }: Props): JSX.Element => {
   const [show, setShow] = useState(false);
 
   return (

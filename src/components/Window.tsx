@@ -10,30 +10,28 @@ import {
   MouseEventHandler,
   PropsWithChildren, useEffect, useState,
 } from 'react';
-import { IApplication } from './Application';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import {
+  closeApp, hideApp, IApplication, selectActive, showApp,
+} from '../slices/appsSlice';
 
 interface Props {
-  app: IApplication,
-  taskbarButtonElement: HTMLElement,
-  show: boolean,
-  open: boolean,
-  setShow: (show: boolean) => void,
-  setOpen: (open: boolean) => void
+  app: IApplication
 }
 
-type AnimationWrapperProps = PropsWithChildren<Pick<Props, 'taskbarButtonElement' | 'show' | 'open'>>
-
-const getElementData = (button: HTMLElement) => {
+const getElementData = (selector: string) => {
+  const element = document.querySelector(selector);
+  if (!element) return {};
   const {
     left, top, width, height,
-  } = button.getBoundingClientRect();
+  } = element.getBoundingClientRect();
   return {
     left, top, width, height,
   };
 };
 
 const variants: Variants = {
-  animate: ({ show, el }: { el: HTMLElement, show: boolean }) => (
+  animate: ({ show, selector }: { selector: string, show: boolean }) => (
     show
       ? {
         left: 0,
@@ -44,29 +42,31 @@ const variants: Variants = {
         transitionEnd: { position: 'static' },
       }
       : {
-        ...getElementData(el),
+        ...getElementData(selector),
         opacity: 0,
         position: 'fixed',
+        pointerEvents: 'none',
       }
   ),
 };
 
-const AnimationWrapper = ({
-  open, show, taskbarButtonElement, children,
-}: PropsWithChildren<AnimationWrapperProps>): JSX.Element => (
-  <AnimatePresence>
-    { open && (
-    <motion.div
-      initial={{ scale: 0.95, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      exit={{ scale: 0.95, opacity: 0 }}
-      transition={{ duration: 0.2, ease: 'easeInOut' }}
-      className="absolute inset-0 pointer-events-none"
-    >
-      { taskbarButtonElement && (
+const AnimationWrapper = ({ app, children }: PropsWithChildren<Props>): JSX.Element => {
+  const active = useAppSelector(selectActive);
+  const show = active === app.id;
+
+  return (
+    <AnimatePresence>
+      { app.open && (
+      <motion.div
+        initial={{ scale: 0.95, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.95, opacity: 0 }}
+        transition={{ duration: 0.2, ease: 'easeInOut' }}
+        className="absolute inset-0 pointer-events-none"
+      >
         <motion.div
           variants={variants}
-          custom={{ el: taskbarButtonElement, show }}
+          custom={{ selector: `#taskbar-app-${app.id}`, show }}
           initial={false}
           animate="animate"
           transition={{ duration: 0.2, ease: 'easeInOut' }}
@@ -74,21 +74,20 @@ const AnimationWrapper = ({
         >
           { children }
         </motion.div>
+      </motion.div>
       ) }
-    </motion.div>
-    ) }
-  </AnimatePresence>
-);
+    </AnimatePresence>
+  );
+};
 
-const Window = ({
-  app, taskbarButtonElement, show, open, setShow, setOpen,
-}: Props): JSX.Element => {
+const Window = ({ app }: Props): JSX.Element => {
+  const dispatch = useAppDispatch();
   const [reload, setReload] = useState(false);
 
   const appButtons = [
-    { icon: faWindowMinimize, onClick: () => setShow(false) },
-    { icon: faWindowMaximize, onClick: () => setShow(true) },
-    { icon: faXmark, onClick: () => setOpen(false) },
+    { icon: faWindowMinimize, onClick: () => dispatch(hideApp(app.id)) },
+    { icon: faWindowMaximize, onClick: () => dispatch(showApp(app.id)) },
+    { icon: faXmark, onClick: () => dispatch(closeApp(app.id)) },
   ].map((button, index) => ({ ...button, id: index + 1 }));
 
   const url = new URL(app.url);
@@ -108,7 +107,7 @@ const Window = ({
   }, [reload]);
 
   return (
-    <AnimationWrapper open={open} show={show} taskbarButtonElement={taskbarButtonElement}>
+    <AnimationWrapper app={app}>
       <div className="shrink-0 text-white flex bg-rose-800 h-9 pl-2">
         <div className="shrink-0 text-sm flex relative">
           <div className="w-2 top-0 bottom-0 -left-2 bg-neutral-700 absolute">

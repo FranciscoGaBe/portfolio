@@ -1,36 +1,20 @@
-import { faChessBoard, faShop } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
-import Application, { IApplication } from './Application';
+import { useAppSelector } from '../app/hooks';
+import { selectAppsIds } from '../slices/appsSlice';
+import Application from './Application';
 
-interface Props {
-  taskbarIconsElement: HTMLElement
-}
-
-const apps: IApplication[] = [
-  {
-    name: 'WFG', icon: faChessBoard, url: 'https://franciscogabe.github.io/wfg/', githubUrl: 'https://github.com/FranciscoGaBe/wfg',
-  },
-  {
-    name: 'Shop', icon: faShop, url: 'https://franciscogabe.github.io/shop/', githubUrl: 'https://github.com/FranciscoGaBe/shop',
-  },
-];
-
-const Desktop = ({ taskbarIconsElement }: Props): JSX.Element => {
-  const [desktopElement, setDesktopElement] = useState<HTMLElement | null>(null);
+const Desktop = (): JSX.Element => {
+  const appIds = useAppSelector(selectAppsIds);
 
   return (
     <div
-      ref={setDesktopElement}
       className="grow bg-[url('./assets/images/wallpaper.jpg')] bg-cover bg-center p-2 relative"
     >
       {
-        desktopElement && apps.map(
-          (app) => (
+        appIds.map(
+          (id) => (
             <Application
-              key={app.name}
-              app={app}
-              desktopElement={desktopElement}
-              taskbarIconsElement={taskbarIconsElement}
+              key={id}
+              appId={+id}
             />
           ),
         )
