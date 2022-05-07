@@ -186,7 +186,7 @@ const StartMenu = ({ containerRef }: Props): JSX.Element => {
     <div className="shrink-0 relative text-white">
       {
         containerRef.current && ReactDOM.createPortal(
-          <div className="left-0 top-0 absolute text-white">
+          <div className="left-0 top-0 absolute text-white z-20">
             <AnimatePresence>
               { show && (
               <motion.div

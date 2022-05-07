@@ -20,7 +20,7 @@ const Taskbar = (): JSX.Element => {
 
   return (
     <div ref={containerRef} className="shrink-0 relative">
-      <div className="bg-rose-900 h-10 flex relative z-10">
+      <div className="bg-rose-900 h-10 flex relative z-30">
         <StartMenu containerRef={containerRef} />
         <div className="grow px-4 flex">
           {
