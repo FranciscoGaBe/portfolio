@@ -163,6 +163,20 @@ const MainMenu: React.FC = () => (
 const StartMenu = ({ containerRef }: Props): JSX.Element => {
   const [show, setShow] = useState(false);
 
+  useEffect(() => {
+    const clickOutside = (event: PointerEvent) => {
+      if (!containerRef.current) return;
+      if (containerRef.current.contains(event.target as Node)) return;
+      setShow(false);
+    };
+
+    window.addEventListener('pointerdown', clickOutside);
+
+    return () => {
+      window.removeEventListener('pointerdown', () => clickOutside);
+    };
+  }, [containerRef]);
+
   return (
     <div className="shrink-0 relative text-white">
       {
