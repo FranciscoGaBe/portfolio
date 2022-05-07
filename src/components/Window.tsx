@@ -62,7 +62,7 @@ const AnimationWrapper = ({ app, children }: PropsWithChildren<Props>): JSX.Elem
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.95, opacity: 0 }}
         transition={{ duration: 0.2, ease: 'easeInOut' }}
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none z-10"
       >
         <motion.div
           variants={variants}

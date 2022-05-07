@@ -23,12 +23,14 @@ const Application = ({ appId }: Props): JSX.Element => {
         className={[
           'default-hover-10 select-none text-white w-20 h-20',
           'border-2 border-transparent hover:border-white/20',
+          '[filter:drop-shadow(2px_2px_black)]',
         ].join(' ')}
+        title={app.shortDesc}
         onClick={handleClick}
       >
         <FontAwesomeIcon className="text-4xl" icon={app.icon} />
         <p
-          className="text-lg font-semibold [text-shadow:2px_2px_2px_black] mt-1"
+          className="text-lg font-semibold mt-1"
         >
           { app.name }
         </p>
