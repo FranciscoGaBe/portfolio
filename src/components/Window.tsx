@@ -84,10 +84,12 @@ const Window = ({ app }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const [reload, setReload] = useState(false);
 
+  const close = () => dispatch(closeApp(app.id));
+
   const appButtons = [
     { icon: faWindowMinimize, onClick: () => dispatch(hideApp(app.id)) },
     { icon: faWindowMaximize, onClick: () => dispatch(showApp(app.id)) },
-    { icon: faXmark, onClick: () => dispatch(closeApp(app.id)) },
+    { icon: faXmark, onClick: close },
   ].map((button, index) => ({ ...button, id: index + 1 }));
 
   const url = new URL(app.url);
@@ -114,9 +116,16 @@ const Window = ({ app }: Props): JSX.Element => {
             <div className="w-full h-full bg-rose-800 rounded-br-2xl" />
           </div>
           <div
-            className="h-full w-44 flex items-center justify-center rounded-t-xl bg-neutral-700"
+            className="h-full w-44 flex items-center rounded-t-xl bg-neutral-700 pl-4 pr-2"
           >
-            { app.name }
+            <span>{ app.name }</span>
+            <button
+              type="button"
+              className="default-hover-10 ml-auto w-5 h-5 rounded-full"
+              onClick={close}
+            >
+              <FontAwesomeIcon icon={faXmark} />
+            </button>
           </div>
           <div className="w-2 top-0 bottom-0 -right-2 bg-neutral-700 absolute">
             <div className="w-full h-full bg-rose-800 rounded-bl-2xl" />
