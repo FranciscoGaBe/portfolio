@@ -6,6 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
+import { useAppDispatch } from '../app/hooks';
+import { openApp, showApp } from '../slices/appsSlice';
+import apps from '../utils/apps';
 import PowerOff from './PowerOff';
 
 interface Props {
@@ -37,7 +40,7 @@ const SideMenu: React.FC = () => {
   return (
     <>
       <div
-        className="w-12 relative"
+        className="w-12 relative z-20"
         onPointerMove={() => setHovering(true)}
         onPointerLeave={() => setHovering(false)}
       >
@@ -98,67 +101,69 @@ const SideMenu: React.FC = () => {
   );
 };
 
-const menuItems = [
-  {
-    title: 'Productivity',
-    elements: [
-      { icon: '', onClick: () => undefined },
-      { icon: '', onClick: () => undefined },
-      { icon: '', onClick: () => undefined },
-      { icon: '', onClick: () => undefined },
-      { icon: '', onClick: () => undefined },
-      { icon: '', onClick: () => undefined },
-    ],
-  },
-  {
-    title: 'Explore',
-    elements: [
-      { icon: '', onClick: () => undefined },
-      { icon: '', onClick: () => undefined },
-      { icon: '', onClick: () => undefined },
-      { icon: '', onClick: () => undefined },
-      { icon: '', onClick: () => undefined },
-      { icon: '', onClick: () => undefined },
-    ],
-  },
-].map(
-  (item) => ({
-    ...item,
-    elements: item.elements.map(
-      (element, index) => ({ ...element, id: index + 1 }),
-    ),
-  }),
-);
+const MainMenu: React.FC = () => {
+  const dispatch = useAppDispatch();
 
-const MainMenu: React.FC = () => (
-  <motion.div
-    initial={{ y: 10 }}
-    animate={{ y: 0 }}
-    transition={{ delay: 0.2, ease: 'easeOut', duration: 0.2 }}
-    className="bg-rose-800 pl-2 py-4 flex flex-col gap-3 mb-20"
-  >
+  const menuItems = [
     {
-      menuItems.map((item) => (
-        <div key={item.title} className="px-2">
-          <div className="text-sm mb-2">{ item.title }</div>
-          <div className="flex gap-1 flex-wrap w-[19rem]">
-            {
-              item.elements.map((element) => (
-                <button
-                  key={element.id}
-                  type="button"
-                  className="w-24 h-24 bg-white/10"
-                >
-                  &nbsp;
-                </button>
-              ))
-            }
+      title: 'Projects',
+      elements: Object.values(apps).map((app) => ({
+        id: app.id,
+        name: app.name,
+        icon: app.icon,
+        shortDesc: app.shortDesc,
+        onClick: () => {
+          dispatch(openApp(app.id));
+          dispatch(showApp(app.id));
+        },
+      })),
+    },
+  ];
+
+  return (
+    <motion.div
+      initial={{ y: 10 }}
+      animate={{ y: 0 }}
+      transition={{ delay: 0.2, ease: 'easeOut', duration: 0.2 }}
+      className="bg-rose-800 pl-2 py-4 flex flex-col gap-3 mb-20"
+    >
+      {
+        menuItems.map((item) => (
+          <div key={item.title} className="px-2">
+            <div className="text-sm mb-2">{ item.title }</div>
+            <div className="flex gap-1 flex-wrap w-[19rem]">
+              {
+                item.elements.map((element) => (
+                  <button
+                    key={element.id}
+                    type="button"
+                    className="default-hover-20 w-24 h-24 bg-white/10 relative"
+                    title={`${element.name}: ${element.shortDesc}`}
+                    onClick={element.onClick}
+                  >
+                    { element.icon && (
+                      <FontAwesomeIcon className="text-3xl" icon={element.icon} />
+                    ) }
+                    <p
+                      className="absolute top-1 left-1 flex items-center justify-center font-bold text-sm"
+                    >
+                      { element.name }
+                    </p>
+                    <p
+                      className="absolute bottom-1 text-xs right-1 left-1 text-ellipsis whitespace-nowrap overflow-hidden"
+                    >
+                      { element.shortDesc }
+                    </p>
+                  </button>
+                ))
+              }
+            </div>
           </div>
-        </div>
-      ))
-    }
-  </motion.div>
-);
+        ))
+      }
+    </motion.div>
+  );
+};
 
 const StartMenu = ({ containerRef }: Props): JSX.Element => {
   const [show, setShow] = useState(false);

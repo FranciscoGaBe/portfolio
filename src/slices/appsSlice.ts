@@ -9,7 +9,8 @@ export interface IApplication {
   icon: IconDefinition,
   url: string,
   githubUrl?: string,
-  open: boolean
+  open: boolean,
+  shortDesc: string
 }
 
 interface AppsState {
