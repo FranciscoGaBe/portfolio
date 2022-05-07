@@ -28,7 +28,7 @@ const Application = ({ appId }: Props): JSX.Element => {
       >
         <FontAwesomeIcon className="text-4xl" icon={app.icon} />
         <p
-          className="text-lg font-semibold [text-shadow:2px_2px_2px_black]"
+          className="text-lg font-semibold [text-shadow:2px_2px_2px_black] mt-1"
         >
           { app.name }
         </p>

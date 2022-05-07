@@ -41,7 +41,7 @@ const apps: Record<string, IApplication> = [
     githubUrl: 'https://github.com/FranciscoGaBe/portfolio',
   },
   {
-    name: 'Smol Component',
+    name: 'SC',
     icon: faBook,
     url: 'https://github.com/FranciscoGaBe/Smol-Component',
     githubUrl: 'https://github.com/FranciscoGaBe/Smol-Component',

@@ -7,7 +7,10 @@ const Desktop = (): JSX.Element => {
 
   return (
     <div
-      className="grow bg-[url('./assets/images/wallpaper.jpg')] bg-cover bg-center p-2 relative"
+      className={[
+        'bg-[url("./assets/images/wallpaper.jpg")] bg-cover bg-center',
+        'grow p-2 relative flex flex-wrap items-start justify-start gap-2',
+      ].join(' ')}
     >
       {
         appIds.map(
