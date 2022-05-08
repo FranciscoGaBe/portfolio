@@ -58,60 +58,67 @@ const SideMenu = ({ closeMenu }: CloseMenuProps): JSX.Element => {
   return (
     <>
       <div
-        className="w-12 relative z-20"
+        className="relative w-12 z-20"
         onPointerMove={() => setHovering(true)}
         onPointerLeave={() => setHovering(false)}
       >
         <div
           className={[
             'transition-all duration-200 h-full',
-            'shrink-0 w-12 flex flex-col pt-1 overflow-hidden',
-            show ? 'bg-rose-900 w-60 shadow shadow-black' : 'bg-rose-800 w-12',
+            'shrink-0 overflow-hidden',
+            show ? 'bg-main w-60 shadow shadow-black' : 'w-12',
           ].join(' ')}
         >
-          <div className={`${itemClassName} mb-auto`}>
-            <button
-              className="flex items-center"
-              type="button"
-              onClick={() => setShow(!show)}
-            >
-              <div className="w-12 h-12 flex items-center justify-center shrink-0">
-                <FontAwesomeIcon icon={faBars} />
-              </div>
-              <p className="text-base px-2 font-bold whitespace-nowrap">START</p>
-            </button>
+          <div
+            className={[
+              'transition-all duration-200 h-full pt-1 flex flex-col',
+              show ? 'bg-black/40' : '',
+            ].join(' ')}
+          >
+            <div className={`${itemClassName} mb-auto`}>
+              <button
+                className="flex items-center"
+                type="button"
+                onClick={() => setShow(!show)}
+              >
+                <div className="w-12 h-12 flex items-center justify-center shrink-0">
+                  <FontAwesomeIcon icon={faBars} />
+                </div>
+                <p className="text-base px-2 font-bold whitespace-nowrap">START</p>
+              </button>
+            </div>
+            {
+              buttons.map((button) => (
+                <div key={button.title} className={itemClassName}>
+                  { button.link && (
+                  <a
+                    className="flex items-center"
+                    href={button.link}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <div className="w-12 h-12 flex items-center justify-center shrink-0">
+                      <FontAwesomeIcon icon={button.icon} />
+                    </div>
+                    <p className="text-base px-2 whitespace-nowrap">{ button.title }</p>
+                  </a>
+                  ) }
+                  { button.onClick && (
+                  <button
+                    className="flex items-center"
+                    type="button"
+                    onClick={button.onClick}
+                  >
+                    <div className="w-12 h-12 flex items-center justify-center shrink-0">
+                      <FontAwesomeIcon icon={button.icon} />
+                    </div>
+                    <p className="text-base px-2 whitespace-nowrap">{ button.title }</p>
+                  </button>
+                  ) }
+                </div>
+              ))
+            }
           </div>
-          {
-        buttons.map((button) => (
-          <div key={button.title} className={itemClassName}>
-            { button.link && (
-            <a
-              className="flex items-center"
-              href={button.link}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <div className="w-12 h-12 flex items-center justify-center shrink-0">
-                <FontAwesomeIcon icon={button.icon} />
-              </div>
-              <p className="text-base px-2 whitespace-nowrap">{ button.title }</p>
-            </a>
-            ) }
-            { button.onClick && (
-            <button
-              className="flex items-center"
-              type="button"
-              onClick={button.onClick}
-            >
-              <div className="w-12 h-12 flex items-center justify-center shrink-0">
-                <FontAwesomeIcon icon={button.icon} />
-              </div>
-              <p className="text-base px-2 whitespace-nowrap">{ button.title }</p>
-            </button>
-            ) }
-          </div>
-        ))
-      }
         </div>
       </div>
       { powerOff && ReactDOM.createPortal(<PowerOff />, document.querySelector('#root') as Element) }
@@ -144,7 +151,7 @@ const MainMenu = ({ closeMenu }: CloseMenuProps): JSX.Element => {
       initial={{ y: 10 }}
       animate={{ y: 0 }}
       transition={{ delay: 0.2, ease: 'easeOut', duration: 0.2 }}
-      className="bg-rose-800 pl-2 py-4 flex flex-col gap-3 mb-20"
+      className="pl-2 py-4 flex flex-col gap-3 mb-20"
     >
       {
         menuItems.map((item) => (
@@ -215,9 +222,9 @@ const StartMenu = ({ containerRef }: Props): JSX.Element => {
                 animate={{ y: 0 }}
                 exit={{ y: '100%' }}
                 transition={{ ease: 'easeOut', duration: 0.2 }}
-                className="bottom-0 left-0 absolute bg-rose-800 shadow-lg shadow-black"
+                className="bottom-0 left-0 absolute bg-main shadow-lg shadow-black"
               >
-                <div className="h-full flex">
+                <div className="h-full flex bg-black/20">
                   <SideMenu closeMenu={closeMenu} />
                   <MainMenu closeMenu={closeMenu} />
                 </div>
@@ -228,12 +235,12 @@ const StartMenu = ({ containerRef }: Props): JSX.Element => {
           containerRef.current,
         )
       }
-      <div className="bg-rose-900 h-full">
+      <div className={`h-full ${show ? 'bg-main' : ''}`}>
         <button
           className={[
             'transition-colors duration-200',
-            'text-lg h-full w-12',
-            show ? 'bg-rose-800' : 'bg-rose-900 hover:bg-white/10 hover:text-rose-700',
+            'text-lg h-full w-12 hover:text-main',
+            show ? 'bg-black/20' : 'hover:bg-white/10',
           ].join(' ')}
           type="button"
           onClick={() => setShow(!show)}

@@ -13,7 +13,7 @@ const PowerOff: React.FC = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-rose-800 flex-col"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-main flex-col"
     >
       <div className="text-white text-9xl animate-spin mb-4">
         <FontAwesomeIcon icon={faSpinner} />

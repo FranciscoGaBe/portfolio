@@ -94,11 +94,11 @@ const Window = ({ app }: Props): JSX.Element => {
 
   return (
     <AnimationWrapper app={app}>
-      <div className="shrink-0 text-white flex bg-rose-800 h-9 pl-2">
+      <div className="shrink-0 text-white flex bg-main h-9 pl-2">
         { isApp && (
           <div className="shrink-0 text-sm flex relative">
             <div className="w-2 top-0 bottom-0 -left-2 bg-neutral-700 absolute">
-              <div className="w-full h-full bg-rose-800 rounded-br-2xl" />
+              <div className="w-full h-full bg-main rounded-br-2xl" />
             </div>
             <div
               className="h-full w-44 flex items-center rounded-t-xl bg-neutral-700 pl-4 pr-2"
@@ -113,7 +113,7 @@ const Window = ({ app }: Props): JSX.Element => {
               </button>
             </div>
             <div className="w-2 top-0 bottom-0 -right-2 bg-neutral-700 absolute">
-              <div className="w-full h-full bg-rose-800 rounded-bl-2xl" />
+              <div className="w-full h-full bg-main rounded-bl-2xl" />
             </div>
           </div>
         ) }

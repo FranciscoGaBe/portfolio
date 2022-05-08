@@ -24,13 +24,6 @@ const Settings = (): JSX.Element => {
 
   return (
     <div className="h-full dark:bg-black bg-white">
-      <motion.div
-        animate={{ opacity: 0 }}
-        transition={{ delay: 0.3 }}
-        className="pointer-events-none absolute inset-0 bg-rose-800 flex items-center justify-center"
-      >
-        <FontAwesomeIcon className="text-white text-9xl" icon={faCog} />
-      </motion.div>
       <div className="px-4 py-8">
         <h2 className="text-2xl mb-4">Colors</h2>
         <h3 className="mb-2">Choose your color</h3>
@@ -96,6 +89,13 @@ const Settings = (): JSX.Element => {
           }
         </div>
       </div>
+      <motion.div
+        animate={{ opacity: 0 }}
+        transition={{ delay: 0.3 }}
+        className="pointer-events-none absolute inset-0 bg-main flex items-center justify-center"
+      >
+        <FontAwesomeIcon className="text-white text-9xl" icon={faCog} />
+      </motion.div>
     </div>
   );
 };

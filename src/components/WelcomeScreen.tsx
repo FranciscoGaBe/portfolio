@@ -31,28 +31,30 @@ const WelcomeScreen: React.FC = () => {
       { show && (
       <motion.div
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-rose-800 flex items-center justify-center z-50"
+        className="fixed inset-0 bg-main z-50"
       >
-        <AnimatePresence exitBeforeEnter>
-          <motion.p
-            key={index}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="text-white text-4xl md:text-6xl font-bold p-2"
-          >
-            { messages[index] }
-          </motion.p>
-        </AnimatePresence>
-        <div className="absolute top-0 right-0">
-          <button
-            className="px-4 py-2 text-white font-semibold text-xl"
-            type="button"
-            onClick={skipScreen}
-          >
-            Skip
-          </button>
+        <div className="h-full w-full flex items-center justify-center bg-black/30">
+          <AnimatePresence exitBeforeEnter>
+            <motion.p
+              key={index}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5, ease: 'easeInOut' }}
+              className="text-white text-4xl md:text-6xl font-bold p-2"
+            >
+              { messages[index] }
+            </motion.p>
+          </AnimatePresence>
+          <div className="absolute top-0 right-0">
+            <button
+              className="px-4 py-2 text-white font-semibold text-xl"
+              type="button"
+              onClick={skipScreen}
+            >
+              Skip
+            </button>
+          </div>
         </div>
       </motion.div>
       ) }

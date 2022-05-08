@@ -20,10 +20,11 @@ const Taskbar = (): JSX.Element => {
 
   return (
     <div ref={containerRef} className="shrink-0 relative">
-      <div className="bg-rose-900 h-10 flex relative z-30">
-        <StartMenu containerRef={containerRef} />
-        <div className="grow px-4 flex">
-          {
+      <div className="bg-main relative z-30">
+        <div className="h-10 bg-black/40 flex">
+          <StartMenu containerRef={containerRef} />
+          <div className="grow px-4 flex">
+            {
             openApps.map((app) => (
               <button
                 key={app.id}
@@ -48,8 +49,9 @@ const Taskbar = (): JSX.Element => {
               </button>
             ))
           }
+          </div>
+          <DayTime />
         </div>
-        <DayTime />
       </div>
     </div>
   );
