@@ -15,9 +15,13 @@ interface Props {
   containerRef: React.RefObject<HTMLElement>
 }
 
+interface CloseMenuProps {
+  closeMenu: () => void
+}
+
 const itemClassName = 'default-hover-10 h-12 text-xl';
 
-const SideMenu: React.FC = () => {
+const SideMenu = ({ closeMenu }: CloseMenuProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const [show, setShow] = useState(false);
   const [powerOff, setPowerOff] = useState(false);
@@ -41,9 +45,14 @@ const SideMenu: React.FC = () => {
       onClick: () => {
         dispatch(openApp(settingsId));
         dispatch(showApp(settingsId));
+        closeMenu();
       },
     },
-    { icon: faPowerOff, title: 'Power Off', onClick: () => setPowerOff(true) },
+    {
+      icon: faPowerOff,
+      title: 'Power Off',
+      onClick: () => { setPowerOff(true); },
+    },
   ];
 
   return (
@@ -110,7 +119,7 @@ const SideMenu: React.FC = () => {
   );
 };
 
-const MainMenu: React.FC = () => {
+const MainMenu = ({ closeMenu }: CloseMenuProps): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const menuItems = [
@@ -124,6 +133,7 @@ const MainMenu: React.FC = () => {
         onClick: () => {
           dispatch(openApp(app.id));
           dispatch(showApp(app.id));
+          closeMenu();
         },
       })),
     },
@@ -191,6 +201,8 @@ const StartMenu = ({ containerRef }: Props): JSX.Element => {
     };
   }, [containerRef]);
 
+  const closeMenu = () => setShow(false);
+
   return (
     <div className="shrink-0 relative text-white">
       {
@@ -206,8 +218,8 @@ const StartMenu = ({ containerRef }: Props): JSX.Element => {
                 className="bottom-0 left-0 absolute bg-rose-800 shadow-lg shadow-black"
               >
                 <div className="h-full flex">
-                  <SideMenu />
-                  <MainMenu />
+                  <SideMenu closeMenu={closeMenu} />
+                  <MainMenu closeMenu={closeMenu} />
                 </div>
               </motion.div>
               ) }
