@@ -1,14 +1,14 @@
 import {
   faGithub, faLinkedin, faWindows,
 } from '@fortawesome/free-brands-svg-icons';
-import { faBars, faPowerOff } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCog, faPowerOff } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useAppDispatch } from '../app/hooks';
 import { openApp, showApp } from '../slices/appsSlice';
-import apps from '../utils/apps';
+import apps, { settingsId } from '../utils/apps';
 import PowerOff from './PowerOff';
 
 interface Props {
@@ -18,6 +18,7 @@ interface Props {
 const itemClassName = 'default-hover-10 h-12 text-xl';
 
 const SideMenu: React.FC = () => {
+  const dispatch = useAppDispatch();
   const [show, setShow] = useState(false);
   const [powerOff, setPowerOff] = useState(false);
   const [hovering, setHovering] = useState(false);
@@ -34,6 +35,14 @@ const SideMenu: React.FC = () => {
   const buttons = [
     { icon: faLinkedin, title: 'Linkedin', link: 'https://www.linkedin.com/in/francisco-garrido-679084198/' },
     { icon: faGithub, title: 'Github', link: 'https://github.com/FranciscoGaBe' },
+    {
+      icon: faCog,
+      title: 'Settings',
+      onClick: () => {
+        dispatch(openApp(settingsId));
+        dispatch(showApp(settingsId));
+      },
+    },
     { icon: faPowerOff, title: 'Power Off', onClick: () => setPowerOff(true) },
   ];
 
@@ -107,7 +116,7 @@ const MainMenu: React.FC = () => {
   const menuItems = [
     {
       title: 'Projects',
-      elements: Object.values(apps).map((app) => ({
+      elements: Object.values(apps).filter((app) => app.type === 'app').map((app) => ({
         id: app.id,
         name: app.name,
         icon: app.icon,

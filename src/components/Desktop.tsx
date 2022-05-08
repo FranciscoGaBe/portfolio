@@ -1,9 +1,9 @@
 import { useAppSelector } from '../app/hooks';
-import { selectAppsIds } from '../slices/appsSlice';
+import { selectApps } from '../slices/appsSlice';
 import Application from './Application';
 
 const Desktop = (): JSX.Element => {
-  const appIds = useAppSelector(selectAppsIds);
+  const apps = useAppSelector(selectApps);
 
   return (
     <div
@@ -13,11 +13,11 @@ const Desktop = (): JSX.Element => {
       ].join(' ')}
     >
       {
-        appIds.map(
-          (id) => (
+        apps.map(
+          (app) => (
             <Application
-              key={id}
-              appId={+id}
+              key={app.id}
+              app={app}
             />
           ),
         )

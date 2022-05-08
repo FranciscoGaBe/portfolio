@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import {
-  IApplication, selectActive, selectOpenApps, showApp,
+  AppItem, selectActive, selectOpenApps, showApp,
 } from '../slices/appsSlice';
 import DayTime from './DayTime';
 import StartMenu from './StartMenu';
@@ -13,7 +13,7 @@ const Taskbar = (): JSX.Element => {
   const openApps = useAppSelector(selectOpenApps);
   const active = useAppSelector(selectActive);
 
-  const handleClick = (app: IApplication) => {
+  const handleClick = (app: AppItem) => {
     const isActive = active === app.id;
     dispatch(showApp(isActive ? -1 : app.id));
   };
