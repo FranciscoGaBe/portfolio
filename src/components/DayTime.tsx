@@ -27,7 +27,7 @@ const DayTime: React.FC = () => {
 
   return (
     <div
-      className="ml-auto text-white flex flex-col justify-between text-center text-xs px-2 pt-0.5 pb-1"
+      className="ml-auto font-medium flex flex-col justify-between text-center text-xs px-2 pt-0.5 pb-1"
     >
       <p>{ getTime(time) }</p>
       <p>{ getDate(time) }</p>

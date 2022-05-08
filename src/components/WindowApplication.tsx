@@ -31,8 +31,8 @@ const WindowApplication = ({ app }: Props): JSX.Element => {
     <>
       <div
         className={[
-          'shrink-0 h-9 bg-neutral-700 text-white px-2 py-1',
-          'border-b border-white/20 flex items-center',
+          'shrink-0 h-9 px-2 py-1',
+          'border-b dark:border-white/20 border-black/20 flex items-center dark:text-white text-neutral-600',
         ].join(' ')}
       >
         <div className="shrink-0">
@@ -46,13 +46,13 @@ const WindowApplication = ({ app }: Props): JSX.Element => {
         </div>
         <div className="grow px-2 text-sm h-full">
           <div
-            className="rounded-full h-full bg-neutral-800"
+            className="rounded-full h-full dark:bg-neutral-800 bg-gray-100"
           >
             <div
               role="textbox"
               tabIndex={0}
               className={[
-                'transition-all duration-200 hover:bg-white/5',
+                'transition-all duration-200 dark:hover:bg-white/5 hover:bg-black/5',
                 'w-full h-full rounded-full px-4',
                 'cursor-text flex items-center',
                 'border-2 border-transparent focus:border-blue-400',
@@ -61,8 +61,8 @@ const WindowApplication = ({ app }: Props): JSX.Element => {
               onKeyDown={() => undefined}
             >
               <div>
-                <span>{ url.hostname }</span>
-                <span className="text-neutral-400">
+                <span className="text-black dark:text-white">{ url.hostname }</span>
+                <span className="dark:text-neutral-400 text-neutral-500">
                   { url.port && (
                     <>
                       <span>:</span>

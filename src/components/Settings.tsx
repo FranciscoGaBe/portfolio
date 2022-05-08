@@ -70,15 +70,15 @@ const Settings = (): JSX.Element => {
                       <div
                         className={[
                           'absolute inset-0 border-2 pointer-events-none',
-                          'group-hover:border-white',
-                          hexColor === item.color ? 'border-white' : ' border-transparent',
+                          'group-hover:dark:border-white group-hover:border-black',
+                          hexColor === item.color ? 'dark:border-white border-black' : ' border-transparent',
                         ].join(' ')}
                       />
                       { hexColor === item.color && (
                         <div
-                          className="absolute top-0 right-0 w-5 h-5 bg-white flex items-center justify-center"
+                          className="absolute top-0 right-0 w-5 h-5 dark:bg-white bg-black flex items-center justify-center"
                         >
-                          <FontAwesomeIcon className="text-black text-sm" icon={faCheck} />
+                          <FontAwesomeIcon className="dark:text-black text-white text-sm" icon={faCheck} />
                         </div>
                       ) }
                     </div>

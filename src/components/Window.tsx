@@ -66,7 +66,7 @@ const AnimationWrapper = ({ app, children }: PropsWithChildren<Props>): JSX.Elem
           initial={false}
           animate="animate"
           transition={{ duration: 0.2, ease: 'easeInOut' }}
-          className="bg-neutral-700 pointer-events-auto flex flex-col"
+          className="dark:bg-neutral-700 bg-white pointer-events-auto flex flex-col"
         >
           { children }
         </motion.div>
@@ -94,35 +94,35 @@ const Window = ({ app }: Props): JSX.Element => {
 
   return (
     <AnimationWrapper app={app}>
-      <div className="shrink-0 text-white flex bg-main h-9 pl-2">
+      <div className="shrink-0 flex bg-main h-9 pl-2">
         { isApp && (
           <div className="shrink-0 text-sm flex relative">
-            <div className="w-2 top-0 bottom-0 -left-2 bg-neutral-700 absolute">
+            <div className="w-2 top-0 bottom-0 -left-2 dark:bg-neutral-700 bg-white absolute">
               <div className="w-full h-full bg-main rounded-br-2xl" />
             </div>
             <div
-              className="h-full w-44 flex items-center rounded-t-xl bg-neutral-700 pl-4 pr-2"
+              className="h-full w-44 flex items-center rounded-t-xl dark:bg-neutral-700 bg-white pl-4 pr-2"
             >
               <span>{ app.name }</span>
               <button
                 type="button"
-                className="transition-all duration-200 hover:bg-white/20 ml-auto w-5 h-5 rounded-full"
+                className="transition-all duration-200 dark:hover:bg-white/20 hover:bg-black/10 ml-auto w-5 h-5 rounded-full"
                 onClick={close}
               >
                 <FontAwesomeIcon icon={faXmark} />
               </button>
             </div>
-            <div className="w-2 top-0 bottom-0 -right-2 bg-neutral-700 absolute">
+            <div className="w-2 top-0 bottom-0 -right-2 dark:bg-neutral-700 bg-white absolute">
               <div className="w-full h-full bg-main rounded-bl-2xl" />
             </div>
           </div>
         ) }
         { !isApp && (
-          <div className="shrink-0 flex items-center px-4">
+          <div className="shrink-0 flex items-center px-4 text-white">
             { app.name }
           </div>
         ) }
-        <div className="ml-auto shrink-0 h-full relative">
+        <div className="ml-auto shrink-0 h-full relative text-white">
           <div className="absolute bottom-0 left-0">
             <AnimatePresence>
               { showDescription && (
@@ -131,7 +131,7 @@ const Window = ({ app }: Props): JSX.Element => {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.7 }}
                   transition={{ duration: 0.1, ease: 'easeOut' }}
-                  className="absolute top-0 -right-12 bg-neutral-800 shadow-[0px_1px_2px_1px_black] p-4 w-56"
+                  className="absolute top-0 -right-12 dark:bg-neutral-800 bg-white text-black dark:text-white shadow-[0px_1px_2px_1px_black] p-4 w-56"
                 >
                   { app.desc }
                 </motion.div>

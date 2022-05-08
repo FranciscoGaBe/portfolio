@@ -66,13 +66,13 @@ const SideMenu = ({ closeMenu }: CloseMenuProps): JSX.Element => {
           className={[
             'transition-all duration-200 h-full',
             'shrink-0 overflow-hidden',
-            show ? 'bg-main w-60 shadow shadow-black' : 'w-12',
+            show ? 'dark:bg-main bg-neutral-300 w-60 shadow shadow-black' : 'w-12',
           ].join(' ')}
         >
           <div
             className={[
               'transition-all duration-200 h-full pt-1 flex flex-col',
-              show ? 'bg-black/40' : '',
+              show ? 'dark:bg-black/40 bg-white/30' : '',
             ].join(' ')}
           >
             <div className={`${itemClassName} mb-auto`}>
@@ -160,7 +160,7 @@ const MainMenu = ({ closeMenu }: CloseMenuProps): JSX.Element => {
             <div className="flex gap-1 flex-wrap w-[19rem]">
               {
                 item.elements.map((element) => (
-                  <div key={element.id} className="bg-main">
+                  <div key={element.id} className="dark:bg-main bg-black/10">
                     <button
                       type="button"
                       className={[
@@ -215,10 +215,10 @@ const StartMenu = ({ containerRef }: Props): JSX.Element => {
   const closeMenu = () => setShow(false);
 
   return (
-    <div className="shrink-0 relative text-white">
+    <div className="shrink-0 relative">
       {
         containerRef.current && ReactDOM.createPortal(
-          <div className="left-0 top-0 absolute text-white z-20">
+          <div className="left-0 top-0 absolute z-20">
             <AnimatePresence>
               { show && (
               <motion.div
@@ -226,9 +226,9 @@ const StartMenu = ({ containerRef }: Props): JSX.Element => {
                 animate={{ y: 0 }}
                 exit={{ y: '100%' }}
                 transition={{ ease: 'easeOut', duration: 0.2 }}
-                className="bottom-0 left-0 absolute bg-main shadow-lg shadow-black"
+                className="bottom-0 left-0 absolute dark:bg-main bg-neutral-300 shadow-lg shadow-black"
               >
-                <div className="h-full flex bg-black/20">
+                <div className="h-full flex dark:bg-black/20">
                   <SideMenu closeMenu={closeMenu} />
                   <MainMenu closeMenu={closeMenu} />
                 </div>
@@ -244,7 +244,7 @@ const StartMenu = ({ containerRef }: Props): JSX.Element => {
           className={[
             'transition-colors duration-200',
             'text-lg h-full w-12 hover:text-main',
-            show ? 'bg-black/20' : 'hover:bg-white/10',
+            show ? 'dark:bg-black/20 bg-neutral-300' : 'dark:hover:bg-white/10 hover:bg-neutral-100',
           ].join(' ')}
           type="button"
           onClick={() => setShow(!show)}

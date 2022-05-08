@@ -20,8 +20,8 @@ const Taskbar = (): JSX.Element => {
 
   return (
     <div ref={containerRef} className="shrink-0 relative">
-      <div className="bg-main relative z-30">
-        <div className="h-10 bg-black/40 flex">
+      <div className="dark:bg-main bg-neutral-200 relative z-30">
+        <div className="h-10 dark:bg-black/40 flex">
           <StartMenu containerRef={containerRef} />
           <div className="grow px-4 flex">
             {
@@ -30,10 +30,10 @@ const Taskbar = (): JSX.Element => {
                 key={app.id}
                 id={`taskbar-app-${app.id}`}
                 className={[
-                  'transition-all duration-200',
-                  'h-10 w-12 text-white text-2xl relative group',
-                  'flex justify-center items-center hover:bg-white/20',
-                  active === app.id ? 'bg-white/10' : '',
+                  'transition-all duration-200 group',
+                  'h-10 w-12 text-2xl relative flex justify-center items-center',
+                  'dark:hover:bg-white/20 hover:bg-white',
+                  active === app.id ? 'dark:bg-white/10 bg-neutral-100' : '',
                 ].join(' ')}
                 type="button"
                 onClick={() => handleClick(app)}
@@ -43,7 +43,7 @@ const Taskbar = (): JSX.Element => {
                   className={[
                     'transition-all duration-200',
                     'absolute bottom-0 w-10 group-hover:w-12',
-                    'border-b-2 border-gray-400',
+                    'border-b-2 dark:border-gray-400 border-main',
                   ].join(' ')}
                 />
               </button>
