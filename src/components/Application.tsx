@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ReactDOM from 'react-dom';
 import { useAppDispatch } from '../app/hooks';
 import {
   AppItem,
@@ -7,10 +8,11 @@ import {
 import Window from './Window';
 
 interface Props {
-  app: AppItem
+  app: AppItem,
+  desktopRef: React.RefObject<HTMLElement>
 }
 
-const Application = ({ app }: Props): JSX.Element => {
+const Application = ({ app, desktopRef }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const handleClick = () => {
@@ -40,8 +42,11 @@ const Application = ({ app }: Props): JSX.Element => {
         </button>
       ) }
       {
-        (app.type === 'app' || app.type === 'component') && (
-          <Window app={app as (ApplicationItem | ComponentItem)} />
+        (app.type === 'app' || app.type === 'component')
+        && desktopRef.current
+        && ReactDOM.createPortal(
+          <Window app={app as (ApplicationItem | ComponentItem)} />,
+          desktopRef.current,
         )
       }
     </>
