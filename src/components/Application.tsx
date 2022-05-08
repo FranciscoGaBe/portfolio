@@ -24,8 +24,8 @@ const Application = ({ app }: Props): JSX.Element => {
         <button
           type="button"
           className={[
-            'default-hover-10 select-none text-white w-20 h-20',
-            'border-2 border-transparent hover:border-white/20',
+            'select-none text-white w-20 h-20',
+            'border-2 border-transparent hover:border-white/20 hover:bg-white/10',
             '[filter:drop-shadow(2px_2px_black)]',
           ].join(' ')}
           title={app?.shortDesc}

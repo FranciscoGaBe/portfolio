@@ -30,9 +30,9 @@ const Taskbar = (): JSX.Element => {
                 key={app.id}
                 id={`taskbar-app-${app.id}`}
                 className={[
-                  'default-hover-20',
+                  'transition-all duration-200',
                   'h-10 w-12 text-white text-2xl relative group',
-                  'flex justify-center items-center',
+                  'flex justify-center items-center hover:bg-white/20',
                   active === app.id ? 'bg-white/10' : '',
                 ].join(' ')}
                 type="button"

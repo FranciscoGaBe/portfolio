@@ -38,7 +38,7 @@ const WindowApplication = ({ app }: Props): JSX.Element => {
         <div className="shrink-0">
           <button
             type="button"
-            className="default-hover-10 w-7 h-7 rounded-full"
+            className="transition-all duration-200 hover:bg-white/10 w-7 h-7 rounded-full"
             onClick={() => setReload(true)}
           >
             <FontAwesomeIcon icon={faRotateRight} />
@@ -52,7 +52,8 @@ const WindowApplication = ({ app }: Props): JSX.Element => {
               role="textbox"
               tabIndex={0}
               className={[
-                'default-hover-5 w-full h-full rounded-full px-4',
+                'transition-all duration-200 hover:bg-white/5',
+                'w-full h-full rounded-full px-4',
                 'cursor-text flex items-center',
                 'border-2 border-transparent focus:border-blue-400',
               ].join(' ')}
@@ -78,7 +79,7 @@ const WindowApplication = ({ app }: Props): JSX.Element => {
           <a
             href={app.url}
             target="_blank"
-            className="default-hover-10 w-7 h-7 rounded-full flex items-center justify-center"
+            className="transition-all duration-200 hover:bg-white/10 w-7 h-7 rounded-full flex items-center justify-center"
             rel="noreferrer"
           >
             <FontAwesomeIcon icon={faExternalLink} />
@@ -87,7 +88,7 @@ const WindowApplication = ({ app }: Props): JSX.Element => {
             <a
               href={app.githubUrl}
               target="_blank"
-              className="default-hover-10 w-7 h-7 rounded-full flex items-center justify-center"
+              className="transition-all duration-200 hover:bg-white/10 w-7 h-7 rounded-full flex items-center justify-center"
               rel="noreferrer"
             >
               <FontAwesomeIcon icon={faGithub} />

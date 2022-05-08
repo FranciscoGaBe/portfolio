@@ -19,7 +19,7 @@ interface CloseMenuProps {
   closeMenu: () => void
 }
 
-const itemClassName = 'default-hover-10 h-12 text-xl';
+const itemClassName = 'transition-all duration-200 hover:bg-white/10 h-12 text-xl';
 
 const SideMenu = ({ closeMenu }: CloseMenuProps): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -160,27 +160,31 @@ const MainMenu = ({ closeMenu }: CloseMenuProps): JSX.Element => {
             <div className="flex gap-1 flex-wrap w-[19rem]">
               {
                 item.elements.map((element) => (
-                  <button
-                    key={element.id}
-                    type="button"
-                    className="default-hover-20 w-24 h-24 bg-white/10 relative"
-                    title={`${element.name}: ${element.shortDesc}`}
-                    onClick={element.onClick}
-                  >
-                    { element.icon && (
+                  <div key={element.id} className="bg-main">
+                    <button
+                      type="button"
+                      className={[
+                        'transition-all duration-200 w-24 h-24 relative',
+                        'hover:bg-white/20',
+                      ].join(' ')}
+                      title={`${element.name}: ${element.shortDesc}`}
+                      onClick={element.onClick}
+                    >
+                      { element.icon && (
                       <FontAwesomeIcon className="text-3xl" icon={element.icon} />
-                    ) }
-                    <p
-                      className="absolute top-1 left-1 flex items-center justify-center font-bold text-sm"
-                    >
-                      { element.name }
-                    </p>
-                    <p
-                      className="absolute bottom-1 text-xs right-1 left-1 text-ellipsis whitespace-nowrap overflow-hidden"
-                    >
-                      { element.shortDesc }
-                    </p>
-                  </button>
+                      ) }
+                      <p
+                        className="absolute top-1 left-1 flex items-center justify-center font-bold text-sm"
+                      >
+                        { element.name }
+                      </p>
+                      <p
+                        className="absolute bottom-1 text-xs right-1 left-1 text-ellipsis whitespace-nowrap overflow-hidden"
+                      >
+                        { element.shortDesc }
+                      </p>
+                    </button>
+                  </div>
                 ))
               }
             </div>

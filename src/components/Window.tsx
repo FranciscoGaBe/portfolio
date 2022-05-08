@@ -106,7 +106,7 @@ const Window = ({ app }: Props): JSX.Element => {
               <span>{ app.name }</span>
               <button
                 type="button"
-                className="default-hover-10 ml-auto w-5 h-5 rounded-full"
+                className="transition-all duration-200 hover:bg-white/20 ml-auto w-5 h-5 rounded-full"
                 onClick={close}
               >
                 <FontAwesomeIcon icon={faXmark} />
@@ -144,7 +144,7 @@ const Window = ({ app }: Props): JSX.Element => {
                 <button
                   key={button.id}
                   className={[
-                    'default-hover-10',
+                    'trnasition-all duration-200 hover:bg-white/20',
                     'h-full w-12 first:text-sm last:text-xl',
                     'last:hover:bg-red-600',
                     showDescription ? 'first:bg-white/10' : '',
