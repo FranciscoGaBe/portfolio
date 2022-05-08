@@ -46,7 +46,7 @@ const WindowApplication = ({ app }: Props): JSX.Element => {
         </div>
         <div className="grow px-2 text-sm h-full">
           <div
-            className="rounded-full h-full dark:bg-neutral-800 bg-gray-100"
+            className="rounded-full h-full dark:bg-neutral-800 bg-gray-100 text-ellipsis whitespace-nowrap overflow-hidden"
           >
             <div
               role="textbox"
