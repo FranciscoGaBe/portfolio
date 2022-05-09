@@ -63,8 +63,11 @@ const ColorsSettings = (): JSX.Element => {
                   key={item.id}
                   className="h-[calc(2.5rem+1px)] w-10 relative flex items-end group"
                 >
-                  <button
+                  <motion.button
+                    initial={{ scale: 0, opacity: 0, borderRadius: 40 }}
+                    animate={{ scale: 1, opacity: 1, borderRadius: 0 }}
                     className="w-full h-10"
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
                     style={{ backgroundColor: item.color }}
                     type="button"
                     aria-label={`Color: ${item.color}`}
