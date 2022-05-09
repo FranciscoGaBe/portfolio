@@ -40,7 +40,7 @@ const variants: Variants = {
       : {
         ...getElementData(selector),
         opacity: 0,
-        position: 'fixed',
+        position: 'absolute',
         pointerEvents: 'none',
       }
   ),
@@ -58,7 +58,7 @@ const AnimationWrapper = ({ app, children }: PropsWithChildren<Props>): JSX.Elem
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.95, opacity: 0 }}
         transition={{ duration: 0.2, ease: 'easeInOut' }}
-        className="absolute inset-0 pointer-events-none z-10"
+        className="absolute inset-0 pointer-events-none z-40"
       >
         <motion.div
           variants={variants}

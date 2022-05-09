@@ -1,6 +1,7 @@
 import {
-  faBook, faChessBoard, faCog, faFolderTree, faKeyboard, faPaste, faPencil, faShop,
+  faBook, faChessBoard, faCog, faFolderTree, faKeyboard, faPaste, faPencil, faPowerOff, faShop,
 } from '@fortawesome/free-solid-svg-icons';
+import PowerOff from '../components/PowerOff';
 import Settings from '../components/Settings';
 import { AppItem, ApplicationItem, ComponentItem } from '../slices/appsSlice';
 
@@ -78,8 +79,10 @@ const applications: ApplicationItem[] = [
 ];
 
 export const settingsId = 'settings';
+export const powerOffId = 'poweroff';
 export const components = {
   [settingsId]: Settings,
+  [powerOffId]: PowerOff,
 } as Record<string, () => JSX.Element>;
 
 const componentItems: ComponentItem[] = [
@@ -91,6 +94,16 @@ const componentItems: ComponentItem[] = [
     open: false,
     component: settingsId,
     hideIcon: true,
+  },
+  {
+    id: powerOffId,
+    type: 'component',
+    icon: faPowerOff,
+    name: 'Power Off',
+    open: false,
+    component: powerOffId,
+    hideIcon: true,
+    hideTaskbar: true,
   },
 ];
 

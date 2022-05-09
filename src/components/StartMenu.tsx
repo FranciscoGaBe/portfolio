@@ -8,8 +8,7 @@ import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useAppDispatch } from '../app/hooks';
 import { openApp, showApp } from '../slices/appsSlice';
-import apps, { settingsId } from '../utils/apps';
-import PowerOff from './PowerOff';
+import apps, { powerOffId, settingsId } from '../utils/apps';
 
 interface Props {
   containerRef: React.RefObject<HTMLElement>
@@ -24,7 +23,6 @@ const itemClassName = 'transition-all duration-200 hover:bg-white/10 h-12 text-x
 const SideMenu = ({ closeMenu }: CloseMenuProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const [show, setShow] = useState(false);
-  const [powerOff, setPowerOff] = useState(false);
   const [hovering, setHovering] = useState(false);
 
   useEffect(() => {
@@ -36,58 +34,59 @@ const SideMenu = ({ closeMenu }: CloseMenuProps): JSX.Element => {
     return () => window.clearTimeout(timeout);
   }, [hovering]);
 
+  const launchApp = (app: string) => {
+    dispatch(openApp(app));
+    dispatch(showApp(app));
+    closeMenu();
+  };
+
   const buttons = [
     { icon: faLinkedin, title: 'Linkedin', link: 'https://www.linkedin.com/in/francisco-garrido-679084198/' },
     { icon: faGithub, title: 'Github', link: 'https://github.com/FranciscoGaBe' },
     {
       icon: faCog,
       title: 'Settings',
-      onClick: () => {
-        dispatch(openApp(settingsId));
-        dispatch(showApp(settingsId));
-        closeMenu();
-      },
+      onClick: () => launchApp(settingsId),
     },
     {
       icon: faPowerOff,
       title: 'Power Off',
-      onClick: () => { setPowerOff(true); },
+      onClick: () => launchApp(powerOffId),
     },
   ];
 
   return (
-    <>
+    <div
+      className="relative w-12 z-20"
+      onPointerMove={() => setHovering(true)}
+      onPointerLeave={() => setHovering(false)}
+    >
       <div
-        className="relative w-12 z-20"
-        onPointerMove={() => setHovering(true)}
-        onPointerLeave={() => setHovering(false)}
+        className={[
+          'transition-all duration-200 h-full',
+          'shrink-0 overflow-hidden',
+          show ? 'dark:bg-main bg-neutral-300 w-60 shadow shadow-black' : 'w-12',
+        ].join(' ')}
       >
         <div
           className={[
-            'transition-all duration-200 h-full',
-            'shrink-0 overflow-hidden',
-            show ? 'dark:bg-main bg-neutral-300 w-60 shadow shadow-black' : 'w-12',
+            'transition-all duration-200 h-full pt-1 flex flex-col',
+            show ? 'dark:bg-black/40 bg-white/30' : '',
           ].join(' ')}
         >
-          <div
-            className={[
-              'transition-all duration-200 h-full pt-1 flex flex-col',
-              show ? 'dark:bg-black/40 bg-white/30' : '',
-            ].join(' ')}
-          >
-            <div className={`${itemClassName} mb-auto`}>
-              <button
-                className="flex items-center"
-                type="button"
-                onClick={() => setShow(!show)}
-              >
-                <div className="w-12 h-12 flex items-center justify-center shrink-0">
-                  <FontAwesomeIcon icon={faBars} />
-                </div>
-                <p className="text-base px-2 font-bold whitespace-nowrap">START</p>
-              </button>
-            </div>
-            {
+          <div className={`${itemClassName} mb-auto`}>
+            <button
+              className="flex items-center"
+              type="button"
+              onClick={() => setShow(!show)}
+            >
+              <div className="w-12 h-12 flex items-center justify-center shrink-0">
+                <FontAwesomeIcon icon={faBars} />
+              </div>
+              <p className="text-base px-2 font-bold whitespace-nowrap">START</p>
+            </button>
+          </div>
+          {
               buttons.map((button) => (
                 <div key={button.title} className={itemClassName}>
                   { button.link && (
@@ -118,11 +117,9 @@ const SideMenu = ({ closeMenu }: CloseMenuProps): JSX.Element => {
                 </div>
               ))
             }
-          </div>
         </div>
       </div>
-      { powerOff && ReactDOM.createPortal(<PowerOff />, document.querySelector('#root') as Element) }
-    </>
+    </div>
   );
 };
 
