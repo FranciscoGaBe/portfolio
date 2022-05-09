@@ -10,7 +10,7 @@ import StartMenu from './StartMenu';
 const Taskbar = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const containerRef = useRef<HTMLDivElement>(null);
-  const openApps = useAppSelector(selectOpenApps);
+  const openApps = useAppSelector(selectOpenApps).filter(({ hideTaskbar }) => !hideTaskbar);
   const active = useAppSelector(selectActive);
 
   const handleClick = (app: AppItem) => {
