@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import {
   closeApp, hideApp, selectActive, showApp, ApplicationItem, ComponentItem,
 } from '../slices/appsSlice';
-import components from '../utils/components';
+import { components } from '../utils/apps';
 import WindowApplication from './WindowApplication';
 
 interface Props {

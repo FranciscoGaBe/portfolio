@@ -1,9 +1,8 @@
 import {
   faBook, faChessBoard, faCog, faFolderTree, faKeyboard, faPaste, faPencil, faShop,
 } from '@fortawesome/free-solid-svg-icons';
+import Settings from '../components/Settings';
 import { AppItem, ApplicationItem, ComponentItem } from '../slices/appsSlice';
-
-export const settingsId = 'settings';
 
 const applications: ApplicationItem[] = [
   {
@@ -78,7 +77,12 @@ const applications: ApplicationItem[] = [
   },
 ];
 
-const components: ComponentItem[] = [
+export const settingsId = 'settings';
+export const components = {
+  [settingsId]: Settings,
+} as Record<string, () => JSX.Element>;
+
+const componentItems: ComponentItem[] = [
   {
     id: settingsId,
     type: 'component',
@@ -92,5 +96,5 @@ const components: ComponentItem[] = [
 
 export default [
   ...applications,
-  ...components,
+  ...componentItems,
 ].reduce((obj, item) => ({ ...obj, [item.id]: item }), {}) as Record<string, AppItem>;
