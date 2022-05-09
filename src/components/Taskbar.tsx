@@ -19,7 +19,7 @@ const Taskbar = (): JSX.Element => {
   };
 
   return (
-    <div ref={containerRef} className="shrink-0 relative">
+    <div ref={containerRef} className="shrink-0 relative z-40">
       <div className="dark:bg-main bg-neutral-200 relative z-30">
         <div className="h-10 dark:bg-black/40 flex">
           <StartMenu containerRef={containerRef} />
