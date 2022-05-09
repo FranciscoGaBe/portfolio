@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useAppDispatch } from '../app/hooks';
-import { openApp, showApp } from '../slices/appsSlice';
+import { LinkItem, openApp, showApp } from '../slices/appsSlice';
 import apps, { powerOffId, settingsId } from '../utils/apps';
 
 interface Props {
@@ -129,11 +129,13 @@ const MainMenu = ({ closeMenu }: CloseMenuProps): JSX.Element => {
   const menuItems = [
     {
       title: 'Projects',
-      elements: Object.values(apps).filter((app) => app.type === 'app').map((app) => ({
+      elements: Object.values(apps).filter((app) => app.type === 'app' || app.type === 'link').map((app) => ({
         id: app.id,
         name: app.name,
         icon: app.icon,
         shortDesc: app.shortDesc,
+        type: app.type,
+        url: (app as LinkItem).url,
         onClick: () => {
           dispatch(openApp(app.id));
           dispatch(showApp(app.id));
@@ -158,29 +160,57 @@ const MainMenu = ({ closeMenu }: CloseMenuProps): JSX.Element => {
               {
                 item.elements.map((element) => (
                   <div key={element.id} className="dark:bg-main bg-black/10">
-                    <button
-                      type="button"
-                      className={[
-                        'transition-all duration-200 w-24 h-24 relative',
-                        'hover:bg-white/20',
-                      ].join(' ')}
-                      title={`${element.name}: ${element.shortDesc}`}
-                      onClick={element.onClick}
-                    >
-                      { element.icon && (
-                      <FontAwesomeIcon className="text-3xl" icon={element.icon} />
-                      ) }
-                      <p
-                        className="absolute top-1 left-1 flex items-center justify-center font-bold text-sm"
+                    { element.type !== 'link' && (
+                      <button
+                        type="button"
+                        className={[
+                          'transition-all duration-200 w-24 h-24 relative',
+                          'hover:bg-white/20',
+                        ].join(' ')}
+                        title={`${element.name}: ${element.shortDesc}`}
+                        onClick={element.onClick}
                       >
-                        { element.name }
-                      </p>
-                      <p
-                        className="absolute bottom-1 text-xs right-1 left-1 text-ellipsis whitespace-nowrap overflow-hidden"
+                        { element.icon && (
+                        <FontAwesomeIcon className="text-3xl" icon={element.icon} />
+                        ) }
+                        <p
+                          className="absolute top-1 left-1 flex items-center justify-center font-bold text-sm"
+                        >
+                          { element.name }
+                        </p>
+                        <p
+                          className="absolute bottom-1 text-xs right-1 left-1 text-ellipsis whitespace-nowrap overflow-hidden"
+                        >
+                          { element.shortDesc }
+                        </p>
+                      </button>
+                    ) }
+                    { element.type === 'link' && (
+                      <a
+                        className={[
+                          'transition-all duration-200 w-24 h-24 relative',
+                          'hover:bg-white/20 flex items-center justify-center',
+                        ].join(' ')}
+                        title={`${element.name}: ${element.shortDesc}`}
+                        href={element.url}
+                        target="_blank"
+                        rel="noreferrer"
                       >
-                        { element.shortDesc }
-                      </p>
-                    </button>
+                        { element.icon && (
+                        <FontAwesomeIcon className="text-3xl" icon={element.icon} />
+                        ) }
+                        <p
+                          className="absolute top-1 left-1 flex items-center justify-center font-bold text-sm"
+                        >
+                          { element.name }
+                        </p>
+                        <p
+                          className="absolute bottom-1 text-xs right-1 left-1 text-ellipsis whitespace-nowrap overflow-hidden"
+                        >
+                          { element.shortDesc }
+                        </p>
+                      </a>
+                    ) }
                   </div>
                 ))
               }

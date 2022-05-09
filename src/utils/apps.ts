@@ -3,7 +3,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import PowerOff from '../components/PowerOff';
 import Settings from '../components/Settings';
-import { AppItem, ApplicationItem, ComponentItem } from '../slices/appsSlice';
+import {
+  AppItem, ApplicationItem, ComponentItem, LinkItem,
+} from '../slices/appsSlice';
 
 const applications: ApplicationItem[] = [
   {
@@ -66,15 +68,18 @@ const applications: ApplicationItem[] = [
     shortDesc: 'My portfolio, the one you are currently seeing',
     desc: 'My personal portfolio, the one you are currently using. Inspired by Windos 10 interface. Built using React with Redux',
   },
+];
+
+const links: LinkItem[] = [
   {
     id: 'sc',
-    type: 'app',
+    type: 'link',
     name: 'SC',
     icon: faBook,
     url: 'https://github.com/FranciscoGaBe/Smol-Component',
-    githubUrl: 'https://github.com/FranciscoGaBe/Smol-Component',
     shortDesc: 'Component base Front End library',
     desc: 'A small component based Front End library, made out of curiosity to have fun figuring out how to make a Front End framework. Built in vanilla JS',
+    hideTaskbar: true,
   },
 ];
 
@@ -109,5 +114,6 @@ const componentItems: ComponentItem[] = [
 
 export default [
   ...applications,
+  ...links,
   ...componentItems,
 ].reduce((obj, item) => ({ ...obj, [item.id]: item }), {}) as Record<string, AppItem>;
