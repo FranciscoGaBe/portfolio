@@ -1,5 +1,7 @@
 import { store } from '../app/store';
-import { setColor, setDarkMode, SettingsState } from '../slices/settingsSlice';
+import {
+  setColor, setDarkMode, SettingsState,
+} from '../slices/settingsSlice';
 
 const subscribeToStore = (myStore: typeof store) => {
   const debounceTime = 500;
@@ -15,7 +17,8 @@ const subscribeToStore = (myStore: typeof store) => {
     timeout = window.setTimeout(() => {
       const saveData = { ...data };
       delete saveData.color;
-      window.localStorage.setItem('settings', JSON.stringify(data));
+      delete saveData.backgrounds;
+      window.localStorage.setItem('settings', JSON.stringify(saveData));
       timeout = 0;
     }, debounceTime);
   });

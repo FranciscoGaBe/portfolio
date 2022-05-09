@@ -94,7 +94,7 @@ const Window = ({ app }: Props): JSX.Element => {
 
   return (
     <AnimationWrapper app={app}>
-      <div className="shrink-0 flex bg-main h-9 pl-2">
+      <div className={`shrink-0 flex h-9 pl-2 ${isApp ? 'bg-main' : 'bg-transparent absolute top-0 left-0 right-0'}`}>
         { isApp && (
           <div className="shrink-0 text-sm flex relative">
             <div className="w-2 top-0 bottom-0 -left-2 dark:bg-neutral-700 bg-white absolute">
@@ -118,11 +118,11 @@ const Window = ({ app }: Props): JSX.Element => {
           </div>
         ) }
         { !isApp && (
-          <div className="shrink-0 flex items-center px-4 text-white">
+          <div className="shrink-0 flex items-center px-2">
             { app.name }
           </div>
         ) }
-        <div className="ml-auto shrink-0 h-full relative text-white">
+        <div className={`ml-auto shrink-0 h-full relative ${isApp ? 'text-white' : ''}`}>
           <div className="absolute bottom-0 left-0">
             <AnimatePresence>
               { showDescription && (
@@ -144,9 +144,10 @@ const Window = ({ app }: Props): JSX.Element => {
                 <button
                   key={button.id}
                   className={[
-                    'trnasition-all duration-200 hover:bg-white/20',
+                    'trnasition-all duration-200',
                     'h-full w-12 first:text-sm last:text-xl',
                     'last:hover:bg-red-600',
+                    isApp ? 'hover:bg-white/20' : 'hover:text-white hover:bg-main',
                     showDescription ? 'first:bg-white/10' : '',
                   ].join(' ')}
                   type="button"
