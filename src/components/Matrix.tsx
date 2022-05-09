@@ -24,7 +24,7 @@ const Matrix = ({ height, width }: Props): JSX.Element => {
     ctx.fillRect(0, 0, myCanvas.width, myCanvas.height);
 
     const cols = Math.floor(w / 20) + 1;
-    const ypos = Array(cols).fill(0);
+    const ypos = Array(cols).fill(0).map(() => -20 * Math.floor(Math.random() * 20));
 
     const interval = window.setInterval(() => {
       ctx.fillStyle = '#0001';
