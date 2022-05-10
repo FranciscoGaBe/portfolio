@@ -93,8 +93,8 @@ const Hack = ({ setOpen }: Props): JSX.Element => {
             transition={{ delay: 0.5 }}
             className="text-sm font-bold"
           >
-            <p>I am in 😎👍</p>
             <p>Password: 14021992</p>
+            <p>I am in 😎👍</p>
           </motion.div>
           ) }
           <div className="flex items-center flex-wrap leading-5 mb-2">
