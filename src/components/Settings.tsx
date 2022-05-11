@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import {
   addBackground,
   selectAllBackgrounds,
-  selectColorHex, selectDarkMode, setActiveBackground, setColor, setDarkMode,
+  selectColorHex, selectDarkMode, selectRecentColors, setActiveBackground, setColor, setDarkMode,
 } from '../slices/settingsSlice';
 import colors from '../utils/colors';
 
@@ -22,10 +22,48 @@ const rows = Array(Math.ceil(colors.length / perRow)).fill(0).map((_, index) => 
   })),
 }));
 
+const Color = ({ color, activeColor }: { color: string, activeColor: string }): JSX.Element => {
+  const dispatch = useAppDispatch();
+
+  return (
+    (
+      <div
+        className="h-[calc(2.5rem+1px)] w-10 relative flex items-end group"
+      >
+        <motion.button
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="w-full h-10"
+          transition={{ duration: 0.4, ease: 'easeOut' }}
+          style={{ backgroundColor: color }}
+          type="button"
+          aria-label={`Color: ${color}`}
+          onClick={() => dispatch(setColor(color))}
+        />
+        <div
+          className={[
+            'absolute inset-0 border-2 pointer-events-none',
+            'group-hover:dark:border-white group-hover:border-black',
+            activeColor === color ? 'dark:border-white border-black' : ' border-transparent',
+          ].join(' ')}
+        />
+        { activeColor === color && (
+          <div
+            className="absolute top-0 right-0 w-5 h-5 dark:bg-white bg-black flex items-center justify-center"
+          >
+            <FontAwesomeIcon className="dark:text-black text-white text-sm" icon={faCheck} />
+          </div>
+        ) }
+      </div>
+    )
+  );
+};
+
 const ColorsSettings = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const mode = useAppSelector(selectDarkMode) ? 'dark' : 'light';
   const hexColor = useAppSelector(selectColorHex);
+  const recentColors = useAppSelector(selectRecentColors);
 
   return (
     <div>
@@ -53,46 +91,27 @@ const ColorsSettings = (): JSX.Element => {
         </option>
       </select>
       <h3 className="mt-8 mb-4 text-xl">Choose your accent color</h3>
+      <h4 className="mb-2">Recent colors</h4>
+      <div className="flex gap-0.5 mb-8">
+        {
+        recentColors.map((color) => (
+          <Color key={color} color={color} activeColor={hexColor} />
+        ))
+        }
+      </div>
+      <h4 className="mb-2">Windows colors</h4>
       <div className="flex flex-col gap-0.5">
         {
         rows.map((row) => (
           <div key={row.id} className="flex gap-0.5">
             {
-              row.items.map((item) => (
-                <div
-                  key={item.id}
-                  className="h-[calc(2.5rem+1px)] w-10 relative flex items-end group"
-                >
-                  <motion.button
-                    initial={{ scale: 0, opacity: 0, borderRadius: 40 }}
-                    animate={{ scale: 1, opacity: 1, borderRadius: 0 }}
-                    className="w-full h-10"
-                    transition={{ duration: 0.4, ease: 'easeOut' }}
-                    style={{ backgroundColor: item.color }}
-                    type="button"
-                    aria-label={`Color: ${item.color}`}
-                    onClick={() => dispatch(setColor(item.color))}
-                  />
-                  <div
-                    className={[
-                      'absolute inset-0 border-2 pointer-events-none',
-                      'group-hover:dark:border-white group-hover:border-black',
-                      hexColor === item.color ? 'dark:border-white border-black' : ' border-transparent',
-                    ].join(' ')}
-                  />
-                  { hexColor === item.color && (
-                    <div
-                      className="absolute top-0 right-0 w-5 h-5 dark:bg-white bg-black flex items-center justify-center"
-                    >
-                      <FontAwesomeIcon className="dark:text-black text-white text-sm" icon={faCheck} />
-                    </div>
-                  ) }
-                </div>
-              ))
+            row.items.map((item) => (
+              <Color key={item.id} color={item.color} activeColor={hexColor} />
+            ))
             }
           </div>
         ))
-      }
+        }
       </div>
     </div>
   );
@@ -122,7 +141,7 @@ const BackgroundSettings = (): JSX.Element => {
 
   return (
     <div>
-      <h3 className="mb-2">Choose your picture</h3>
+      <h4 className="mb-2">Choose your picture</h4>
       <div className="flex gap-1 flex-wrap mb-2">
         {
           backgrounds.map((bg) => (

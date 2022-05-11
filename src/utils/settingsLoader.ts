@@ -1,6 +1,6 @@
 import { store } from '../app/store';
 import {
-  setColor, setDarkMode, SettingsState,
+  setColor, setDarkMode, setRecentColors, SettingsState,
 } from '../slices/settingsSlice';
 
 const subscribeToStore = (myStore: typeof store) => {
@@ -33,6 +33,7 @@ const loadData = (myStore: typeof store) => {
 
   if ('darkMode' in settings) myStore.dispatch(setDarkMode(settings.darkMode));
   if ('colorHex' in settings) myStore.dispatch(setColor(settings.colorHex));
+  if ('recentColors' in settings) myStore.dispatch(setRecentColors(settings.recentColors));
 };
 
 const settingsLoader = (myStore: typeof store) => {

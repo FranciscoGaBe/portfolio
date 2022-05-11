@@ -5,6 +5,7 @@ export interface SettingsState {
   darkMode: boolean,
   color: string,
   colorHex: string,
+  recentColors: string[],
   backgrounds: { id: number | string, bg: string }[],
 }
 
@@ -26,6 +27,7 @@ const initialState: SettingsState = {
   darkMode: getDarkModePreference(),
   colorHex: '#C30052',
   color: '',
+  recentColors: [],
   backgrounds: getImages(),
 };
 
@@ -43,6 +45,10 @@ export const settingsSlice = createSlice({
       if (!color || color.length !== 3) return;
       state.color = color.join(' ');
       state.colorHex = action.payload;
+      state.recentColors = [
+        action.payload,
+        ...state.recentColors.filter((c) => c !== action.payload).slice(0, 4),
+      ];
     },
     addBackground: (state, action: PayloadAction<string>) => {
       const bgs = [...state.backgrounds];
@@ -62,16 +68,20 @@ export const settingsSlice = createSlice({
         ...bgs,
       ];
     },
+    setRecentColors: (state, action: PayloadAction<string[]>) => {
+      state.recentColors = [...action.payload];
+    },
   },
 });
 
 export const {
-  setDarkMode, setColor, addBackground, setActiveBackground,
+  setDarkMode, setColor, addBackground, setActiveBackground, setRecentColors,
 } = settingsSlice.actions;
 
 export const selectDarkMode = (state: RootState) => state.settings.darkMode;
 export const selectColor = (state: RootState) => state.settings.color;
 export const selectColorHex = (state: RootState) => state.settings.colorHex;
+export const selectRecentColors = (state: RootState) => state.settings.recentColors;
 export const selectAllBackgrounds = (state: RootState) => state.settings.backgrounds;
 export const selectActiveBackground = (state: RootState) => state.settings.backgrounds[0].bg;
 
