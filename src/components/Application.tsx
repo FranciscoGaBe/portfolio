@@ -6,6 +6,7 @@ import {
   AppItem,
   ApplicationItem, ComponentItem, openApp, showApp,
 } from '../slices/appsSlice';
+import { functions } from '../utils/apps';
 import Window from './Window';
 
 interface Props {
@@ -35,7 +36,7 @@ const Application = ({ app, desktopRef }: Props): JSX.Element => {
                 app.row === 'last' ? 'mt-auto' : '',
               ].join(' ')}
               title={app?.shortDesc}
-              onClick={handleClick}
+              onClick={() => (app.type === 'function' ? functions[app.id]() : handleClick())}
             >
               <FontAwesomeIcon className="text-4xl" icon={app.icon} />
               <p

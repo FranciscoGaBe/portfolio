@@ -15,7 +15,7 @@ const Desktop = (): JSX.Element => {
     <div
       ref={desktopRef}
       style={{ backgroundImage: `url(${background})` }}
-      className="grow w-full bg-cover bg-center relative flex"
+      className="grow w-full bg-cover bg-center relative flex pb-4"
     >
       <div className="p-2 relative flex flex-wrap content-start flex-col gap-2">
         {

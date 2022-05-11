@@ -37,7 +37,7 @@ export interface ComponentItem extends BaseApp {
 export interface FunctionItem extends BaseApp {
   type: 'function',
   hideTaskbar: true
-  onClick: () => void,
+  onClick: string,
 }
 
 export type AppItem = ApplicationItem | LinkItem | ComponentItem | FunctionItem

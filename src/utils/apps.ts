@@ -1,13 +1,13 @@
 import {
   faBook,
   faChessBoard,
-  faCog, faFolderTree, faKeyboard, faLaptopCode, faPaste, faPencil, faPowerOff, faShop,
+  faCog, faFolderTree, faKeyboard, faLaptopCode, faPaste, faPencil, faPowerOff, faRepeat, faShop,
 } from '@fortawesome/free-solid-svg-icons';
 import PowerOff from '../components/PowerOff';
 import Settings from '../components/Settings';
 import Skills from '../components/Skills';
 import {
-  AppItem, ApplicationItem, ComponentItem, LinkItem,
+  AppItem, ApplicationItem, ComponentItem, FunctionItem, LinkItem,
 } from '../slices/appsSlice';
 
 const applications: ApplicationItem[] = [
@@ -126,8 +126,29 @@ const componentItems: ComponentItem[] = [
   },
 ];
 
+const welcomeId = 'welcome';
+export const functions = {
+  [welcomeId]: () => {
+    window.localStorage.removeItem('welcome');
+    window.location.reload();
+  },
+} as Record<string, () => void>;
+const functionItems: FunctionItem[] = [
+  {
+    id: welcomeId,
+    type: 'function',
+    icon: faRepeat,
+    name: 'Replay Welcome',
+    hideTaskbar: true,
+    onClick: welcomeId,
+    column: 'last',
+    row: 'last',
+  },
+];
+
 export default [
   ...applications,
   ...links,
   ...componentItems,
+  ...functionItems,
 ].reduce((obj, item) => ({ ...obj, [item.id]: item }), {}) as Record<string, AppItem>;
