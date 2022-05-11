@@ -32,13 +32,13 @@ const Hack = ({ setOpen }: Props): JSX.Element => {
     if (running) return;
     setRunning(true);
     const animate = async () => {
-      await wordControls.start((i: number) => ({
-        display: 'block',
-        transition: {
-          delay: 0.6 + i * 0.03,
-        },
-      }));
       if (index < (lines.length - 1)) {
+        await wordControls.start((i: number) => ({
+          display: 'block',
+          transition: {
+            delay: 0.6 + i * 0.03,
+          },
+        }));
         setCommands((prevState) => [...prevState, lines[index]]);
         setIndex(index + 1);
         wordControls.set({ display: 'none' });
@@ -58,7 +58,7 @@ const Hack = ({ setOpen }: Props): JSX.Element => {
       className="w-full h-full relative flex items-center justify-center"
     >
       <button
-        className="absolute top-0 right-0 font-bold text-[#0f0] [filter:drop-shadow(0px_0px_2px_rgb(255,255,255,0.7))]"
+        className="absolute top-0 right-0 text-2xl font-bold text-[#0f0] [filter:drop-shadow(0px_0px_2px_rgb(255,255,255,0.7))]"
         type="button"
         onClick={() => setOpen(true)}
       >
