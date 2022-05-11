@@ -15,7 +15,7 @@ const getDarkModePreference = () => {
   return true;
 };
 
-const getImages = () => Array(4).fill(0).map(
+const getImages = () => Array(3).fill(0).map(
   (_, index) => {
     const src = `${process.env.PUBLIC_URL}/images/background${index + 1}.jpg`;
     return { id: index + 1, bg: src };
