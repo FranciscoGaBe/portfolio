@@ -12,7 +12,9 @@ interface BaseApp {
   shortDesc?: string,
   desc?: string,
   hideIcon?: boolean,
-  hideTaskbar?: boolean
+  hideTaskbar?: boolean,
+  column?: string,
+  row?: string
 }
 
 export interface ApplicationItem extends BaseApp {

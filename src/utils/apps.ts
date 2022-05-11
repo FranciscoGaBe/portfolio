@@ -122,6 +122,7 @@ const componentItems: ComponentItem[] = [
     name: 'Skills',
     open: false,
     component: skillsId,
+    column: 'last',
   },
 ];
 

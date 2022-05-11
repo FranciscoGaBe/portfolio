@@ -32,6 +32,7 @@ const Application = ({ app, desktopRef }: Props): JSX.Element => {
                 'select-none text-white w-20 h-20',
                 'border-2 border-transparent hover:border-white/20 hover:bg-white/10',
                 '[filter:drop-shadow(2px_2px_black)]',
+                app.row === 'last' ? 'mt-auto' : '',
               ].join(' ')}
               title={app?.shortDesc}
               onClick={handleClick}
@@ -50,6 +51,7 @@ const Application = ({ app, desktopRef }: Props): JSX.Element => {
                 'select-none text-white w-20 h-20 flex items-center justify-center flex-col',
                 'border-2 border-transparent hover:border-white/20 hover:bg-white/10',
                 '[filter:drop-shadow(2px_2px_black)]',
+                app.row === 'last' ? 'mt-auto' : '',
               ].join(' ')}
               title={app?.shortDesc}
               href={app.url}

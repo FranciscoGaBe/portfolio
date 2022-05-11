@@ -6,18 +6,20 @@ import Application from './Application';
 
 const Desktop = (): JSX.Element => {
   const desktopRef = useRef<HTMLDivElement>(null);
-  const apps = useAppSelector(selectApps);
   const background = useAppSelector(selectActiveBackground);
+  const apps = useAppSelector(selectApps);
+  const firstColumn = apps.filter((app) => !app.column || (app.column === 'first'));
+  const lastColumn = apps.filter((app) => (app.column === 'last'));
 
   return (
     <div
       ref={desktopRef}
       style={{ backgroundImage: `url(${background})` }}
-      className="grow w-full bg-cover bg-center relative"
+      className="grow w-full bg-cover bg-center relative flex"
     >
-      <div className="h-full p-2 relative inline-flex flex-wrap items-start flex-col justify-start gap-2">
+      <div className="p-2 relative flex flex-wrap content-start flex-col gap-2">
         {
-        apps.map(
+        firstColumn.map(
           (app) => (
             <Application
               key={app.id}
@@ -26,7 +28,20 @@ const Desktop = (): JSX.Element => {
             />
           ),
         )
-      }
+        }
+      </div>
+      <div className="p-2 relative flex flex-wrap content-start flex-col gap-2 ml-auto">
+        {
+        lastColumn.map(
+          (app) => (
+            <Application
+              key={app.id}
+              app={app}
+              desktopRef={desktopRef}
+            />
+          ),
+        )
+        }
       </div>
     </div>
   );
