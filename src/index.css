@@ -10,3 +10,104 @@
 html, body, #root {
   height: 100vh;
 }
+
+.stars {
+  background: url('./assets/images/2k_stars.jpg') repeat-x;
+  background-size: auto 100%;
+  animation: stars 600s infinite linear;
+}
+
+.planet, .moon, .sun {
+  background-repeat: repeat-x;
+  position: relative;
+  transform-style: preserve-3d;
+  background-size: auto 100%;
+  border-radius: 50%;
+}
+
+.planet {
+  animation: planet 20s infinite linear;
+}
+
+.moon:after, .planet-front:after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.8;
+  border-radius: 50%;
+  background-image: radial-gradient(180% 40% at 50% 0%, transparent, black 40%);
+}
+
+.sun {
+  background-image: url('assets/images/2k_sun.jpg');
+  animation: sun 80s infinite linear;
+}
+
+.moon {
+  background-image: url('assets/images/2k_moon.jpg');
+  animation: moon 50s infinite linear;
+}
+
+.earth {
+  background-image: url('assets/images/2k_earth.jpg');
+}
+
+.mars {
+  background-image: url('assets/images/2k_mars.jpg');
+}
+
+.jupiter {
+  background-image: url('assets/images/2k_jupiter.jpg');
+}
+
+.mercury {
+  background-image: url('assets/images/2k_mercury.jpg');
+}
+
+.neptune {
+  background-image: url('assets/images/2k_neptune.jpg');
+}
+
+.uranus {
+  background-image: url('assets/images/2k_uranus.jpg');
+}
+
+.saturn {
+  background-image: url('assets/images/2k_saturn.jpg');
+}
+
+@keyframes stars {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: -2500px; 
+  }
+}
+
+@keyframes moon {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 127px; 
+  }
+}
+
+@keyframes planet {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 351px; 
+  }
+}
+
+@keyframes sun {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 767px; 
+  }
+}

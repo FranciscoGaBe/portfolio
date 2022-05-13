@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 import SkillsClosed from './SkillsClosed';
-import SkillsPDF from './SkillsPDF';
+import SkillsOpen from './SkillsOpen';
 
 const Skills = (): JSX.Element => {
   const [open, setOpen] = useState(false);
@@ -23,7 +23,7 @@ const Skills = (): JSX.Element => {
             </motion.div>
           ) }
         </AnimatePresence>
-        { open && <SkillsPDF /> }
+        { open && <SkillsOpen /> }
       </div>
     </div>
   );
