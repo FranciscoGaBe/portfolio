@@ -26,7 +26,7 @@ const Skill = ({
   selected: boolean,
   item: { text: string, icon: IconDefinition, color: string }
 }): JSX.Element => (
-  <div className="flex moon items-center justify-center w-16 h-16 text-4xl absolute">
+  <motion.div className="flex moon items-center justify-center w-16 h-16 text-4xl absolute">
     <div style={{ color: item.color }} className="relative z-30">
       { selected && (
         <div className="absolute top-0 left-0 right-0 flex justify-center">
@@ -48,7 +48,7 @@ const Skill = ({
         icon={item.icon}
       />
     </div>
-  </div>
+  </motion.div>
 );
 
 const Planet = (
@@ -188,11 +188,15 @@ const items = menus.map((menu, index) => ({
 }));
 
 const SkillsOpen = (): JSX.Element => (
-  <div className="h-full flex justify-center items-start pt-52 md:pt-64 stars">
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    className="h-full flex justify-center items-start pt-52 md:pt-64 stars"
+  >
     <RotaryMenu items={items} radius={1000} offset={90}>
       <div className="w-96 h-96 sun" />
     </RotaryMenu>
-  </div>
+  </motion.div>
 );
 
 export default SkillsOpen;
