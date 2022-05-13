@@ -58,8 +58,8 @@ const SideMenu = ({ closeMenu }: CloseMenuProps): JSX.Element => {
   return (
     <div
       className="relative w-12 z-20"
-      onPointerMove={() => setHovering(true)}
-      onPointerLeave={() => setHovering(false)}
+      onMouseMove={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
     >
       <div
         className={[
