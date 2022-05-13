@@ -1,15 +1,25 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.53cda91f.css",
-    "main.js": "/portfolio/static/js/main.b0951dec.js",
+    "main.css": "/portfolio/static/css/main.6982217c.css",
+    "main.js": "/portfolio/static/js/main.392dddda.js",
     "static/js/787.1ed0c42c.chunk.js": "/portfolio/static/js/787.1ed0c42c.chunk.js",
+    "static/media/2k_moon.jpg": "/portfolio/static/media/2k_moon.26419cb1ce4138a11aa9.jpg",
+    "static/media/2k_mercury.jpg": "/portfolio/static/media/2k_mercury.8f80953b60adac9859cd.jpg",
+    "static/media/2k_sun.jpg": "/portfolio/static/media/2k_sun.4b569137334e61081651.jpg",
+    "static/media/2k_mars.jpg": "/portfolio/static/media/2k_mars.33960f5af615e67309e5.jpg",
+    "static/media/2k_jupiter.jpg": "/portfolio/static/media/2k_jupiter.3e84533e157949a99de4.jpg",
+    "static/media/2k_earth.jpg": "/portfolio/static/media/2k_earth.981cc3e3660e809249a3.jpg",
+    "static/media/2k_neptune.jpg": "/portfolio/static/media/2k_neptune.6dd112666aad0cd68958.jpg",
+    "static/media/2k_stars.jpg": "/portfolio/static/media/2k_stars.09fecfb664aafb77e679.jpg",
+    "static/media/2k_saturn.jpg": "/portfolio/static/media/2k_saturn.3b074d8e6087d14e4225.jpg",
+    "static/media/2k_uranus.jpg": "/portfolio/static/media/2k_uranus.428ad3f979bd783a27d1.jpg",
     "index.html": "/portfolio/index.html",
-    "main.53cda91f.css.map": "/portfolio/static/css/main.53cda91f.css.map",
-    "main.b0951dec.js.map": "/portfolio/static/js/main.b0951dec.js.map",
+    "main.6982217c.css.map": "/portfolio/static/css/main.6982217c.css.map",
+    "main.392dddda.js.map": "/portfolio/static/js/main.392dddda.js.map",
     "787.1ed0c42c.chunk.js.map": "/portfolio/static/js/787.1ed0c42c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.53cda91f.css",
-    "static/js/main.b0951dec.js"
+    "static/css/main.6982217c.css",
+    "static/js/main.392dddda.js"
   ]
 }
