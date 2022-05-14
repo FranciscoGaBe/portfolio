@@ -126,7 +126,7 @@ const componentItems: ComponentItem[] = [
   },
 ];
 
-const welcomeId = 'welcome';
+export const welcomeId = 'welcome';
 export const functions = {
   [welcomeId]: () => {
     window.localStorage.removeItem('welcome');

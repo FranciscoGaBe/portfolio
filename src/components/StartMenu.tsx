@@ -8,7 +8,10 @@ import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useAppDispatch } from '../app/hooks';
 import { LinkItem, openApp, showApp } from '../slices/appsSlice';
-import apps, { powerOffId, settingsId } from '../utils/apps';
+import apps, {
+  functions,
+  powerOffId, settingsId, skillsId, welcomeId,
+} from '../utils/apps';
 
 interface Props {
   containerRef: React.RefObject<HTMLElement>
@@ -143,6 +146,30 @@ const MainMenu = ({ closeMenu }: CloseMenuProps): JSX.Element => {
         },
       })),
     },
+    {
+      title: 'Extra',
+      elements: [
+        apps[skillsId],
+        apps[settingsId],
+        apps[welcomeId],
+      ].map((app) => ({
+        id: app.id,
+        name: app.name,
+        icon: app.icon,
+        shortDesc: app.shortDesc,
+        type: app.type,
+        url: (app as LinkItem).url,
+        onClick: () => {
+          if (app.type === 'function') {
+            functions[app.id]();
+            return;
+          }
+          dispatch(openApp(app.id));
+          dispatch(showApp(app.id));
+          closeMenu();
+        },
+      })),
+    },
   ];
 
   return (
@@ -167,14 +194,14 @@ const MainMenu = ({ closeMenu }: CloseMenuProps): JSX.Element => {
                           'transition-all duration-200 w-24 h-24 relative',
                           'hover:bg-white/20',
                         ].join(' ')}
-                        title={`${element.name}: ${element.shortDesc}`}
+                        title={`${element.name}: ${element.shortDesc || ''}`}
                         onClick={element.onClick}
                       >
                         { element.icon && (
                         <FontAwesomeIcon className="text-3xl" icon={element.icon} />
                         ) }
                         <p
-                          className="absolute top-1 left-1 flex items-center justify-center font-bold text-sm"
+                          className="absolute top-1 left-1 right-1 text-left font-bold text-sm whitespace-nowrap overflow-hidden text-ellipsis"
                         >
                           { element.name }
                         </p>
