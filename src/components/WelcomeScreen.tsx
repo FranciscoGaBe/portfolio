@@ -5,7 +5,7 @@ const messageTime = 3000;
 const messages = [
   'Making sure everything is ready',
   'It may take a few seconds...',
-  'I am a Full Stack Engineer, with a preference for Front End',
+  'I am a Front End Engineer with a passion for my craft',
   'Welcome to my portfolio',
 ];
 
