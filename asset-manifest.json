@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.6982217c.css",
-    "main.js": "/portfolio/static/js/main.7ee7d125.js",
+    "main.css": "/portfolio/static/css/main.24fe5735.css",
+    "main.js": "/portfolio/static/js/main.ba08ba64.js",
     "static/js/787.1ed0c42c.chunk.js": "/portfolio/static/js/787.1ed0c42c.chunk.js",
     "static/media/2k_moon.jpg": "/portfolio/static/media/2k_moon.26419cb1ce4138a11aa9.jpg",
     "static/media/2k_mercury.jpg": "/portfolio/static/media/2k_mercury.8f80953b60adac9859cd.jpg",
@@ -14,12 +14,12 @@
     "static/media/2k_saturn.jpg": "/portfolio/static/media/2k_saturn.3b074d8e6087d14e4225.jpg",
     "static/media/2k_uranus.jpg": "/portfolio/static/media/2k_uranus.428ad3f979bd783a27d1.jpg",
     "index.html": "/portfolio/index.html",
-    "main.6982217c.css.map": "/portfolio/static/css/main.6982217c.css.map",
-    "main.7ee7d125.js.map": "/portfolio/static/js/main.7ee7d125.js.map",
+    "main.24fe5735.css.map": "/portfolio/static/css/main.24fe5735.css.map",
+    "main.ba08ba64.js.map": "/portfolio/static/js/main.ba08ba64.js.map",
     "787.1ed0c42c.chunk.js.map": "/portfolio/static/js/787.1ed0c42c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6982217c.css",
-    "static/js/main.7ee7d125.js"
+    "static/css/main.24fe5735.css",
+    "static/js/main.ba08ba64.js"
   ]
 }
