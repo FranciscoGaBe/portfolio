@@ -44,7 +44,7 @@ const SideMenu = ({ closeMenu }: CloseMenuProps): JSX.Element => {
   };
 
   const buttons = [
-    { icon: faLinkedin, title: 'Linkedin', link: 'https://www.linkedin.com/in/francisco-garrido-679084198/' },
+    { icon: faLinkedin, title: 'Linkedin', link: 'https://www.linkedin.com/in/francisco-garrido-bear-679084198/' },
     { icon: faGithub, title: 'Github', link: 'https://github.com/FranciscoGaBe' },
     {
       icon: faCog,
